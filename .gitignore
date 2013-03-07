@@ -165,3 +165,7 @@ pip-log.txt
 # NuGet
 packages/*
 !packages/*.config
+
+Raven.Studio.xap
+
+App_Data/

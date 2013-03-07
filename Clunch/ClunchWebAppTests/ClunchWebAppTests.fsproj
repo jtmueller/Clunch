@@ -9,8 +9,9 @@
     <OutputType>Library</OutputType>
     <RootNamespace>WebAppTests</RootNamespace>
     <AssemblyName>WebAppTests</AssemblyName>
-    <targetframeworkversion>4.5</targetframeworkversion>
+    <targetframeworkversion>v4.5</targetframeworkversion>
     <Name>WebAppTests</Name>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
