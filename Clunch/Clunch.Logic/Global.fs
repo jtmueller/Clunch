@@ -103,8 +103,8 @@ type Global() =
         BundleConfig.RegisterBundles BundleTable.Bundles
 
         docStore <-
-            //NonAdminHttp.EnsureCanListenToWhenInNonAdminContext 8080 
-            let store = new EmbeddableDocumentStore(DataDirectory="App_Data", UseEmbeddedHttpServer=false)
+            NonAdminHttp.EnsureCanListenToWhenInNonAdminContext 8080 
+            let store = new EmbeddableDocumentStore(DataDirectory="App_Data", UseEmbeddedHttpServer=true)
             store.Initialize()
 
 
