@@ -14,8 +14,8 @@ type ContactsController(session) =
 
     // GET /api/contacts
     member x.Get() = 
-        x.RavenSession.Query<Contact>().ToListAsync()
+        session.Query<Contact>().ToListAsync()
 
     // POST /api/contacts
     member x.Post ([<FromBody>] contact:Contact) = 
-        x.RavenSession.StoreAsync(contact)
+        session.StoreAsync(contact)
