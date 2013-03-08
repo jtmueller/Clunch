@@ -1,4 +1,4 @@
-﻿namespace FsWeb
+﻿namespace Clunch
 
 open System
 open System.Web
@@ -81,14 +81,10 @@ type ApiRoute = { id: RouteParameter }
 type Global() =
     inherit System.Web.HttpApplication()
 
-    static let _docStore = 
-        lazy
-            //NonAdminHttp.EnsureCanListenToWhenInNonAdminContext 8080 
-            let store = new EmbeddableDocumentStore(DataDirectory="App_Data", UseEmbeddedHttpServer=false)
-            store.Initialize()
+    static let mutable docStore : IDocumentStore = null
         
     /// The shared RavenDB Document Store.
-    static member DocumentStore = _docStore.Value
+    static member DocumentStore = docStore
 
     static member RegisterGlobalFilters (filters:GlobalFilterCollection) =
         filters.Add(new HandleErrorAttribute())
@@ -100,9 +96,15 @@ type Global() =
         routes.MapRoute("Default", "{controller}/{action}/{id}", 
             { controller = "Home"; action = "Index"; id = UrlParameter.Optional } ) |> ignore
 
-    member this.Start() =
+    member this.Application_Start(sender:obj, e:EventArgs) =
         AreaRegistration.RegisterAllAreas()
         Global.RegisterRoutes RouteTable.Routes
         Global.RegisterGlobalFilters GlobalFilters.Filters
         BundleConfig.RegisterBundles BundleTable.Bundles
+
+        docStore <-
+            //NonAdminHttp.EnsureCanListenToWhenInNonAdminContext 8080 
+            let store = new EmbeddableDocumentStore(DataDirectory="App_Data", UseEmbeddedHttpServer=false)
+            store.Initialize()
+
 

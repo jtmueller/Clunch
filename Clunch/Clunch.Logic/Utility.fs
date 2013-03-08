@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module FsWeb.Utility
+module Clunch.Utility
 
 open System
 

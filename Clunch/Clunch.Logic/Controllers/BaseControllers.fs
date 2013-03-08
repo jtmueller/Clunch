@@ -1,4 +1,4 @@
-﻿namespace FsWeb.Controllers
+﻿namespace Clunch.Controllers
 
 open System.Web
 open System.Web.Mvc
@@ -6,13 +6,13 @@ open System.Web.Http
 open System.Threading.Tasks
 open Raven.Client
 open Raven.Client.Document.Async
-open FsWeb
+open Clunch
 
 [<AbstractClass>]
 type RavenController() =
     inherit Controller()
 
-    let session = lazy ( FsWeb.Global.DocumentStore.OpenSession() )
+    let session = lazy ( Clunch.Global.DocumentStore.OpenSession() )
 
     /// The RavenDB document session for the current request.
     member x.RavenSession = session.Value
@@ -27,7 +27,7 @@ type RavenController() =
 type RavenApiController() =
     inherit ApiController()
 
-    let session = lazy ( FsWeb.Global.DocumentStore.OpenAsyncSession() )
+    let session = lazy ( Clunch.Global.DocumentStore.OpenAsyncSession() )
 
     /// The RavenDB document session for the current request.
     member x.RavenSession = session.Value
@@ -39,7 +39,7 @@ type RavenApiController() =
             if session.IsValueCreated then
                 use rs = session.Value
                 if isNotNull rs then
-                    do! rs.SaveChangesAsync() |> (Async.AwaitIAsyncResult >> Async.Ignore)
+                    do! rs.SaveChangesAsync() |> Async.AwaitIAsyncResult |> Async.Ignore
             return result
         }
         Async.StartAsTask(action, cancellationToken=cancelToken)

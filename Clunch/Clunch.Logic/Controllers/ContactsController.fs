@@ -1,4 +1,4 @@
-﻿namespace FsWeb.Controllers
+﻿namespace Clunch.Controllers
 
 open System.Collections.Generic
 open System.Web
@@ -7,7 +7,7 @@ open System.Net.Http
 open System.Web.Http
 open System.Linq
 open Raven.Client
-open FsWeb.Models
+open Clunch.Models
 
 type ContactsController() =
     inherit RavenApiController()

@@ -1,4 +1,4 @@
-﻿namespace FsWeb.Controllers
+﻿namespace Clunch.Controllers
 
 open System.Web
 open System.Web.Mvc

@@ -1,4 +1,4 @@
-﻿namespace FsWeb.Models
+﻿namespace Clunch.Models
 
 // Web API model binding expects private backing fields that match the JSON. Can we make this more flexible?
 
