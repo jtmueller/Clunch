@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClunchWebSpa", "Clunch\ClunchWebSpa\ClunchWebSpa.csproj", "{7EE3A9F8-817B-4371-BF48-12FA68010CE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clunch.Web", "Clunch\Clunch.Web\Clunch.Web.csproj", "{7EE3A9F8-817B-4371-BF48-12FA68010CE9}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ClunchWebAppSpa", "Clunch\ClunchWebAppSpa\ClunchWebAppSpa.fsproj", "{A999575F-C66E-42BF-A70F-655D4C3F0069}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Clunch.Logic", "Clunch\Clunch.Logic\Clunch.Logic.fsproj", "{A999575F-C66E-42BF-A70F-655D4C3F0069}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ClunchWebAppTests", "Clunch\ClunchWebAppTests\ClunchWebAppTests.fsproj", "{25102AF8-150F-4BA6-B519-E3FD5A70FC2C}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Clunch.Tests", "Clunch\Clunch.Tests\Clunch.Tests.fsproj", "{25102AF8-150F-4BA6-B519-E3FD5A70FC2C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9631A7E9-9045-40D4-913D-01D4C9B66D6F}"
 	ProjectSection(SolutionItems) = preProject

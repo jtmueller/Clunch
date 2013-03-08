@@ -8,7 +8,7 @@
     <ProjectGuid>{a999575f-c66e-42bf-a70f-655d4c3f0069}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>FsWeb</RootNamespace>
-    <AssemblyName>WebAppSpa</AssemblyName>
+    <AssemblyName>Clunch.Logic</AssemblyName>
     <targetframeworkversion>v4.5</targetframeworkversion>
     <Name>WebAppSpa</Name>
     <TargetFrameworkProfile />

@@ -8,7 +8,7 @@
     <ProjectGuid>{25102af8-150f-4ba6-b519-e3fd5a70fc2c}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>WebAppTests</RootNamespace>
-    <AssemblyName>WebAppTests</AssemblyName>
+    <AssemblyName>Clunch.Tests</AssemblyName>
     <targetframeworkversion>v4.5</targetframeworkversion>
     <Name>WebAppTests</Name>
     <TargetFrameworkProfile />
@@ -51,12 +51,13 @@
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClunchWebAppSpa\ClunchWebAppSpa.fsproj">
-      <Name>ClunchWebAppSpa</Name>
-      <Project>{a999575f-c66e-42bf-a70f-655d4c3f0069}</Project>
+    <ProjectReference Include="..\Clunch.Web\Clunch.Web.csproj">
+      <Name>Clunch.Web</Name>
+      <Project>{7ee3a9f8-817b-4371-bf48-12fa68010ce9}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition="Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.5\Microsoft.FSharp.Targets" Condition="Exists('$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.5\Microsoft.FSharp.Targets')" />
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.0\Microsoft.FSharp.Targets" Condition="(!Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')) And (!Exists('$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.5\Microsoft.FSharp.Targets')) And (Exists('$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.0\Microsoft.FSharp.Targets'))" />
