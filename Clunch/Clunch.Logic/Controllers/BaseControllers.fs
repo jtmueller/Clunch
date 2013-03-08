@@ -9,37 +9,32 @@ open Raven.Client.Document.Async
 open Clunch
 
 [<AbstractClass>]
-type RavenController() =
+type RavenController(session:IDocumentSession) =
     inherit Controller()
 
-    let session = lazy ( Clunch.Global.DocumentStore.OpenSession() )
-
     /// The RavenDB document session for the current request.
-    member x.RavenSession = session.Value
+    member x.RavenSession = session
 
     override x.OnActionExecuted filterContext =
-        if not filterContext.IsChildAction && session.IsValueCreated then
-            use rs = session.Value
-            if isNull filterContext.Exception && isNotNull rs then
+        if not filterContext.IsChildAction && isNotNull session then
+            use rs = session
+            if isNull filterContext.Exception then
                 rs.SaveChanges()
 
 [<AbstractClass>]
-type RavenApiController() =
+type RavenApiController(session:IAsyncDocumentSession) =
     inherit ApiController()
 
-    let session = lazy ( Clunch.Global.DocumentStore.OpenAsyncSession() )
-
     /// The RavenDB document session for the current request.
-    member x.RavenSession = session.Value
+    member x.RavenSession = session
 
     override x.ExecuteAsync(ctx, cancelToken) = 
         let task = base.ExecuteAsync(ctx, cancelToken)
         let action = async {
             let! result = Async.AwaitTask task
-            if session.IsValueCreated then
-                use rs = session.Value
-                if isNotNull rs then
-                    do! rs.SaveChangesAsync() |> Async.AwaitIAsyncResult |> Async.Ignore
+            if isNotNull session then
+                use rs = session
+                do! rs.SaveChangesAsync() |> Async.AwaitIAsyncResult |> Async.Ignore
             return result
         }
         Async.StartAsTask(action, cancellationToken=cancelToken)

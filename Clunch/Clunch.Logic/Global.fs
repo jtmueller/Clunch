@@ -8,11 +8,8 @@ open System.Web.Http
 open System.Data.Entity
 open System.Web.Optimization
 open System.IO
-open Raven.Client
-open Raven.Client.Embedded
-open Raven.Database.Server
 
-type BundleConfig() =
+type BundleConfig private () =
     static member RegisterBundles (bundles:BundleCollection) =
         ScriptBundle("~/bundles/jquery").Include(
             "~/Scripts/jquery-1*") 
@@ -75,6 +72,43 @@ type BundleConfig() =
             "~/Content/themes/base/jquery.ui.theme.css")
         |> bundles.Add
 
+open Autofac
+open Autofac.Integration.Mvc
+open Autofac.Integration.WebApi
+open Raven.Client
+open Raven.Client.Embedded
+open Raven.Client.Document.Async
+open Raven.Database.Server
+
+type AutofacConfig private () =
+    static member Register config =
+        let builder = Autofac.ContainerBuilder()
+
+        builder.RegisterControllers(typeof<Controllers.RavenController>.Assembly) |> ignore
+        builder.RegisterApiControllers(typeof<Controllers.RavenApiController>.Assembly) |> ignore
+
+        builder.RegisterType<ExtensibleActionInvoker>().As<IActionInvoker>() |> ignore
+        builder.RegisterWebApiFilterProvider(config)
+
+        builder.Register<IDocumentStore>(fun c ->
+            // TODO: config to switch to remote server?
+            //NonAdminHttp.EnsureCanListenToWhenInNonAdminContext 8080 
+            let store = new EmbeddableDocumentStore(DataDirectory="App_Data", UseEmbeddedHttpServer=false)
+            store.Initialize()
+        ).SingleInstance() |> ignore
+
+        builder.Register<IDocumentSession>(fun (c:IComponentContext) -> c.Resolve<IDocumentStore>().OpenSession())
+            .InstancePerHttpRequest() |> ignore
+
+        builder.Register<IAsyncDocumentSession>(fun (c:IComponentContext) -> c.Resolve<IDocumentStore>().OpenAsyncSession())
+            .InstancePerHttpRequest() |> ignore
+
+        let container = builder.Build()
+
+        DependencyResolver.SetResolver(new AutofacDependencyResolver(container))
+        config.DependencyResolver <- new AutofacWebApiDependencyResolver(container)
+
+
 type Route = { controller: string; action: string; id: UrlParameter }
 type ApiRoute = { id: RouteParameter }
 
@@ -101,10 +135,4 @@ type Global() =
         Global.RegisterRoutes RouteTable.Routes
         Global.RegisterGlobalFilters GlobalFilters.Filters
         BundleConfig.RegisterBundles BundleTable.Bundles
-
-        docStore <-
-            NonAdminHttp.EnsureCanListenToWhenInNonAdminContext 8080 
-            let store = new EmbeddableDocumentStore(DataDirectory="App_Data", UseEmbeddedHttpServer=true)
-            store.Initialize()
-
-
+        AutofacConfig.Register GlobalConfiguration.Configuration

@@ -9,8 +9,8 @@ open System.Linq
 open Raven.Client
 open Clunch.Models
 
-type ContactsController() =
-    inherit RavenApiController()
+type ContactsController(session) =
+    inherit RavenApiController(session)
 
     // GET /api/contacts
     member x.Get() = 

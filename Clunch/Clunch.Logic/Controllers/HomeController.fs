@@ -5,7 +5,7 @@ open System.Web.Mvc
 
 [<HandleError>]
 type HomeController() =
-    inherit RavenController()
+    inherit Controller()
 
     member this.Index () =
         this.View() :> ActionResult
