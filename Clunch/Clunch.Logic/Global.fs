@@ -1,6 +1,7 @@
 ﻿namespace Clunch
 
 open System
+open System.Configuration
 open System.Web
 open System.Web.Mvc
 open System.Web.Routing
@@ -69,6 +70,7 @@ open Autofac.Integration.Mvc
 open Autofac.Integration.WebApi
 open Raven.Client
 open Raven.Client.Embedded
+open Raven.Client.Document
 open Raven.Client.Document.Async
 open Raven.Database.Server
 
@@ -83,10 +85,15 @@ type AutofacConfig private () =
         builder.RegisterWebApiFilterProvider(config)
 
         builder.Register<IDocumentStore>(fun c ->
-            // TODO: config to switch to remote server?
-            //NonAdminHttp.EnsureCanListenToWhenInNonAdminContext 8080 
-            let store = new EmbeddableDocumentStore(DataDirectory="App_Data", UseEmbeddedHttpServer=false)
-            store.Initialize()
+            let embedded = ConfigurationManager.AppSettings.["clunch.embeddedRaven"] |> Boolean.Parse
+            if embedded then
+                let store = 
+                    NonAdminHttp.EnsureCanListenToWhenInNonAdminContext 8080 
+                    new EmbeddableDocumentStore(DataDirectory="App_Data", UseEmbeddedHttpServer=true)
+                store.Initialize()
+            else
+                let store = new DocumentStore(ConnectionStringName="Clunch")
+                store.Initialize()
         ).SingleInstance() |> ignore
 
         builder.Register<IDocumentSession>(fun (c:IComponentContext) -> c.Resolve<IDocumentStore>().OpenSession())
