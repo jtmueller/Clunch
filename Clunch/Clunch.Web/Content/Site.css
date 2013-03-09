@@ -60,6 +60,7 @@ input[type="password"].input-validation-error {
   color: #2BA6CB;
   font-size: large;
 }
-.row {
+.row,
+.row-fluid {
   padding-top: 4px;
 }

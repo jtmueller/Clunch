@@ -1,17 +1,21 @@
 ﻿<p class="row">
-    <a href="#/create" class="btn btn-primary">Create Contact</a>
+    <a href="#/create" role="button" class="btn btn-primary">Create Contact</a>
 </p>
 
-<div class="row">
-    <div class="span5 header">First Name</div>
-    <div class="span5 header">Last Name</div>
-    <div class="span2 header">Phone</div>
-</div>
-    
-<div data-bind="foreach: contacts">
-    <div class="row">
-        <div class="span5" data-bind="text: firstName"/>
-        <div class="span5" data-bind="text: lastName"/>
-        <div class="span2" data-bind="text: phone"/>
-    </div>
-</div>
+<table class="table span8">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: contacts">
+        <tr>
+            <td data-bind="text: firstName"></td>
+            <td data-bind="text: lastName"></td>
+            <td data-bind="text: phone"></td>
+        </tr>
+    </tbody>
+</table>
+

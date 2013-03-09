@@ -14,7 +14,11 @@ type ContactsController(session) =
 
     // GET /api/contacts
     member x.Get() = 
-        session.Query<Contact>().ToListAsync()
+        (query {
+            for contact in session.Query<Contact>() do
+            sortBy contact.FirstName 
+            select contact           
+        }).ToListAsync()
 
     // POST /api/contacts
     member x.Post ([<FromBody>] contact:Contact) = 
