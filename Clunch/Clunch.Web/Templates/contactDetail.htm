@@ -1,18 +1,17 @@
-﻿<div class="nine.columns.centered">
-    <p class="row">
-        <a href="#/create" class="small button radius">Create Contact</a>
-    </p>
-    <div class="row">
-        <div class="five columns header">FirstName</div>
-        <div class="five columns header">LastName</div>
-        <div class="two columns header">Phone</div>
-    </div>
+﻿<p class="row">
+    <a href="#/create" class="btn btn-primary">Create Contact</a>
+</p>
+
+<div class="row">
+    <div class="span5 header">First Name</div>
+    <div class="span5 header">Last Name</div>
+    <div class="span2 header">Phone</div>
+</div>
     
-    <div data-bind="foreach: contacts">
-        <div class="row">
-            <div class="five columns" data-bind="text: firstName"/>
-            <div class="five columns" data-bind="text: lastName"/>
-            <div class="two columns" data-bind="text: phone"/>
-        </div>
+<div data-bind="foreach: contacts">
+    <div class="row">
+        <div class="span5" data-bind="text: firstName"/>
+        <div class="span5" data-bind="text: lastName"/>
+        <div class="span2" data-bind="text: phone"/>
     </div>
 </div>

@@ -15,10 +15,6 @@ type BundleConfig private () =
             "~/Scripts/jquery-1*") 
         |> bundles.Add
 
-        ScriptBundle("~/bundles/jqueryui").Include(
-            "~/Scripts/jquery-ui*") 
-        |> bundles.Add
-
         ScriptBundle("~/bundles/jqueryval").Include(
             "~/Scripts/jquery.unobtrusive*",
             "~/Scripts/jquery.validate*")
@@ -27,7 +23,9 @@ type BundleConfig private () =
         ScriptBundle("~/bundles/extLibs").Include(
             "~/Scripts/underscore.js",   
             "~/Scripts/toastr.js",
-            "~/Scripts/knockout-2.*")
+            "~/Scripts/knockout-2.*",
+            "~/Scripts/knockout.mapping*",
+            "~/Scripts/bootstrap.*")
         |> bundles.Add
 
         if Directory.Exists(HttpContext.Current.Server.MapPath "/Scripts/models") then                                     
@@ -46,31 +44,25 @@ type BundleConfig private () =
                 "~/Scripts/app/router.js")
             |> bundles.Add
 
-        ScriptBundle("~/bundles/sammy").IncludeDirectory("~/Scripts/Sammy", "*.js", true) 
+        ScriptBundle("~/bundles/sammy")
+            .IncludeDirectory("~/Scripts/Sammy", "*.js", true) 
         |> bundles.Add
 
         ScriptBundle("~/bundles/modernizr").Include(
             "~/Scripts/modernizr-*") 
         |> bundles.Add
 
-        StyleBundle("~/Content/css").Include(
-            "~/Content/*.css") 
+        StyleBundle("~/styles/bootstrap").Include(
+            "~/Content/bootstrap/bootstrap.*",
+            "~/Content/bootstrap/bootstrap-responsive.*")
         |> bundles.Add
 
-        StyleBundle("~/Content/themes/base/css").Include(
-            "~/Content/themes/base/jquery.ui.core.css",
-            "~/Content/themes/base/jquery.ui.resizable.css",
-            "~/Content/themes/base/jquery.ui.selectable.css",
-            "~/Content/themes/base/jquery.ui.accordion.css",
-            "~/Content/themes/base/jquery.ui.autocomplete.css",
-            "~/Content/themes/base/jquery.ui.button.css",
-            "~/Content/themes/base/jquery.ui.dialog.css",
-            "~/Content/themes/base/jquery.ui.slider.css",
-            "~/Content/themes/base/jquery.ui.tabs.css",
-            "~/Content/themes/base/jquery.ui.datepicker.css",
-            "~/Content/themes/base/jquery.ui.progressbar.css",
-            "~/Content/themes/base/jquery.ui.theme.css")
+        StyleBundle("~/styles/css").Include(
+            "~/Content/toastr.css",
+            "~/Content/toastr-responsive.css",
+            "~/Content/Site.css") 
         |> bundles.Add
+
 
 open Autofac
 open Autofac.Integration.Mvc
