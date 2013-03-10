@@ -1,36 +1,35 @@
-(function ($) {
-    appFsMvc.App = function( contactsViewModel ) {
-        return $.sammy( "#content", function () {
-            var self = this;
+﻿(function() {
 
-            this.contactViewModel = contactsViewModel;
-
-            this.renderTemplate = function ( html ) {
-                self.$element().html( html );
-                ko.applyBindings( self.contactViewModel );
-            };
-
-            // display all contacts
-            this.get( "#/", function() {
-                this.render("/Templates/contactDetail.htm", {}, function ( html ) {
-                    self.renderTemplate( html );
-                });
-            });
-
-            // display the create contacts view
-            this.get( "#/create", function() {
-                this.render("/Templates/contactCreate.htm", {}, function ( html ) {
-                    self.renderTemplate( html );
-                });
-            });
+  (function($) {
+    appFsMvc.App = function(contactsViewModel) {
+      return $.sammy('#content', function() {
+        var self,
+          _this = this;
+        self = this;
+        this.contactViewModel = contactsViewModel;
+        this.renderTemplate = function(html) {
+          _this.$element().html(html);
+          return ko.applyBindings(_this.contactViewModel);
+        };
+        this.get('#/', function() {
+          return this.render('/Templates/contactDetail.htm', {}, function(html) {
+            return self.renderTemplate(html);
+          });
         });
+        return this.get('#/create', function() {
+          return this.render('/Templates/contactCreate.htm', {}, function(html) {
+            return self.renderTemplate(html);
+          });
+        });
+      });
     };
-
-    $(function () {
-        $.getJSON( "/api/contacts", function ( data ) {
-            var viewModel = new appFsMvc.ViewModels.ContactsViewModel( data );
-            appFsMvc.App( viewModel ).run( "#/" );
-        });
+    return $(function() {
+      return $.getJSON('/api/contacts', function(data) {
+        var viewModel;
+        viewModel = new appFsMvc.ViewModels.ContactsViewModel(data);
+        return appFsMvc.App(viewModel).run('#/');
+      });
     });
-})(jQuery);
+  })(jQuery);
 
+}).call(this);

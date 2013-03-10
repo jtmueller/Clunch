@@ -163,10 +163,29 @@
     <Content Include="Images\glyphicons-halflings-white.png" />
     <Content Include="Images\glyphicons-halflings.png" />
     <Content Include="example.html" />
-    <Content Include="Scripts\app\main.js" />
-    <Content Include="Scripts\app\router.js" />
-    <Content Include="Scripts\app\utility.js" />
+    <Content Include="Scripts\app\main.js">
+      <DependentUpon>main.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app\main.min.js">
+      <DependentUpon>main.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app\router.js">
+      <DependentUpon>router.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app\router.min.js">
+      <DependentUpon>router.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app\utility-old.js" />
+    <Content Include="Scripts\app\main.coffee" />
+    <Content Include="Scripts\app\router.coffee" />
+    <Content Include="Scripts\app\utility.coffee" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\app\utility.js">
+      <DependentUpon>utility.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app\utility.min.js">
+      <DependentUpon>utility.coffee</DependentUpon>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -187,7 +206,12 @@
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\underscore.min.js" />
-    <Content Include="Scripts\viewModels\contactsViewModel.js" />
+    <Content Include="Scripts\viewModels\contactsViewModel.js">
+      <DependentUpon>contactsViewModel.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\viewModels\contactsViewModel.min.js">
+      <DependentUpon>contactsViewModel.coffee</DependentUpon>
+    </Content>
     <Content Include="Templates\contactCreate.htm" />
     <Content Include="Templates\contactDetail.htm" />
     <Content Include="Web.config">
@@ -225,6 +249,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Scripts\viewModels\contactsViewModel.coffee" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

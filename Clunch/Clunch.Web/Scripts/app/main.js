@@ -1,1 +1,5 @@
-window.appFsMvc = {};
+﻿(function() {
+
+  window.appFsMvc = {};
+
+}).call(this);
