@@ -15,6 +15,10 @@
             ).done((contact) =>
                 toastr.success 'You have successfully created a new contact!', 'Success!'
                 @contacts.push contact
+                @contacts.sort (a,b) -> 
+                    an = a.FirstName.toLowerCase() 
+                    bn = b.FirstName.toLowerCase()
+                    if an == bn then 0 else if an > bn then 1 else -1
                 window.location.href = '#/'
             ).fail(->
                 toastr.error 'There was an error creating your new contact.', '<sad face>'

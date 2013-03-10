@@ -18,6 +18,18 @@
         }).done(function(contact) {
           toastr.success('You have successfully created a new contact!', 'Success!');
           _this.contacts.push(contact);
+          _this.contacts.sort(function(a, b) {
+            var an, bn;
+            an = a.FirstName.toLowerCase();
+            bn = b.FirstName.toLowerCase();
+            if (an === bn) {
+              return 0;
+            } else if (an > bn) {
+              return 1;
+            } else {
+              return -1;
+            }
+          });
           return window.location.href = '#/';
         }).fail(function() {
           return toastr.error('There was an error creating your new contact.', '<sad face>');
