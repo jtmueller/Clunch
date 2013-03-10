@@ -1,6 +1,6 @@
 ﻿namespace Clunch.Models
 
-// Web API model binding expects private backing fields that match the JSON. Can we make this more flexible?
+// Web API model binding expects private backing fields that match the JSON. F# Records have all sorts of problems.
 
 type Contact() = 
     let mutable id = ""

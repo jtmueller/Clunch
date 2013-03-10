@@ -20,7 +20,7 @@ type BundleConfig private () =
             "~/Scripts/jquery.unobtrusive*",
             "~/Scripts/jquery.validate*")
         |> bundles.Add
-            
+        
         ScriptBundle("~/bundles/extLibs").Include(
             "~/Scripts/underscore.js",   
             "~/Scripts/toastr.js",
@@ -69,7 +69,6 @@ open Autofac
 open Autofac.Integration.Mvc
 open Autofac.Integration.WebApi
 open Raven.Client
-open Raven.Client.Embedded
 open Raven.Client.Document
 open Raven.Client.Document.Async
 open Raven.Database.Server
@@ -85,15 +84,8 @@ type AutofacConfig private () =
         builder.RegisterWebApiFilterProvider(config)
 
         builder.Register<IDocumentStore>(fun c ->
-            let embedded = ConfigurationManager.AppSettings.["clunch.embeddedRaven"] |> Boolean.Parse
-            if embedded then
-                let store = 
-                    NonAdminHttp.EnsureCanListenToWhenInNonAdminContext 8080 
-                    new EmbeddableDocumentStore(DataDirectory="App_Data", UseEmbeddedHttpServer=true)
-                store.Initialize()
-            else
-                let store = new DocumentStore(ConnectionStringName="Clunch")
-                store.Initialize()
+            let store = new DocumentStore(ConnectionStringName="Clunch")
+            store.Initialize()
         ).SingleInstance() |> ignore
 
         builder.Register<IDocumentSession>(fun (c:IComponentContext) -> c.Resolve<IDocumentStore>().OpenSession())

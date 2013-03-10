@@ -28,10 +28,9 @@ type RavenApiController(session:IAsyncDocumentSession) =
         let task = base.ExecuteAsync(ctx, cancelToken)
         let action = async {
             let! result = Async.AwaitTask task
-            if isNotNull session then
-                use rs = session
-                // to-do F# async wrapper methods
-                do! rs.SaveChangesAsync() |> Async.AwaitIAsyncResult |> Async.Ignore
+            use rs = session
+            do! rs.AsyncSaveChanges()
             return result
         }
         Async.StartAsTask(action, cancellationToken=cancelToken)
+
