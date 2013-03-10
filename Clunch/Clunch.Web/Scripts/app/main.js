@@ -1,5 +1,5 @@
 ﻿(function() {
 
-  window.appFsMvc = {};
+  window.Clunch = {};
 
 }).call(this);

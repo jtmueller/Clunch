@@ -175,7 +175,6 @@
     <Content Include="Scripts\app\router.min.js">
       <DependentUpon>router.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\utility-old.js" />
     <Content Include="Scripts\app\main.coffee" />
     <Content Include="Scripts\app\router.coffee" />
     <Content Include="Scripts\app\utility.coffee" />

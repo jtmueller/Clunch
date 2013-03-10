@@ -1,7 +1,7 @@
 ﻿(function() {
 
   (function($) {
-    appFsMvc.App = function(contactsViewModel) {
+    Clunch.App = function(contactsViewModel) {
       return $.sammy('#content', function() {
         var self,
           _this = this;
@@ -26,8 +26,8 @@
     return $(function() {
       return $.getJSON('/api/contacts', function(data) {
         var viewModel;
-        viewModel = new appFsMvc.ViewModels.ContactsViewModel(data);
-        return appFsMvc.App(viewModel).run('#/');
+        viewModel = new Clunch.ViewModels.ContactsViewModel(data);
+        return Clunch.App(viewModel).run('#/');
       });
     });
   })(jQuery);

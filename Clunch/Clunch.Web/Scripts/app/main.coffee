@@ -1,1 +1,1 @@
-﻿window.appFsMvc = {}
+﻿window.Clunch = {}

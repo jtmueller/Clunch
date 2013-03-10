@@ -1,5 +1,5 @@
 ﻿(($) ->
-    appFsMvc.App = (contactsViewModel) ->
+    Clunch.App = (contactsViewModel) ->
 
         $.sammy '#content', ->
             self = this
@@ -21,7 +21,7 @@
 
     $ ->
         $.getJSON '/api/contacts', (data) ->
-            viewModel = new appFsMvc.ViewModels.ContactsViewModel data
-            appFsMvc.App( viewModel ).run '#/'
+            viewModel = new Clunch.ViewModels.ContactsViewModel data
+            Clunch.App( viewModel ).run '#/'
 
 )(jQuery)

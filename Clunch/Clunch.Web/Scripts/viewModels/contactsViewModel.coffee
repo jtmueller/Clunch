@@ -5,7 +5,7 @@
         @contacts = ko.observableArray contacts
 
         @addContact = ->
-            data = appFsMvc.utility.serializeObject $('#contactForm')
+            data = Clunch.utility.serializeObject $('#contactForm')
             $.ajax(
                 url: '/api/Contacts',
                 data: JSON.stringify data
@@ -22,4 +22,4 @@
 
         return
 
-)(appFsMvc.ViewModels ?= {}, jQuery)
+)(Clunch.ViewModels ?= {}, jQuery)

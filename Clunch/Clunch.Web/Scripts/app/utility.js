@@ -46,6 +46,6 @@
       }
       return baseUrl;
     };
-  })((_ref = (_base = window.appFsMvc).utility) != null ? _ref : _base.utility = {}, jQuery);
+  })((_ref = (_base = window.Clunch).utility) != null ? _ref : _base.utility = {}, jQuery);
 
 }).call(this);

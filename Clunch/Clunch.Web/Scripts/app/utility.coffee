@@ -33,4 +33,4 @@
 
     return
 
-)(window.appFsMvc.utility ?= {}, jQuery)
+)(window.Clunch.utility ?= {}, jQuery)

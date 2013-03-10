@@ -7,7 +7,7 @@
       this.addContact = function() {
         var data,
           _this = this;
-        data = appFsMvc.utility.serializeObject($('#contactForm'));
+        data = Clunch.utility.serializeObject($('#contactForm'));
         return $.ajax({
           url: '/api/Contacts',
           data: JSON.stringify(data),
@@ -23,6 +23,6 @@
         });
       };
     };
-  })((_ref = appFsMvc.ViewModels) != null ? _ref : appFsMvc.ViewModels = {}, jQuery);
+  })((_ref = Clunch.ViewModels) != null ? _ref : Clunch.ViewModels = {}, jQuery);
 
 }).call(this);
