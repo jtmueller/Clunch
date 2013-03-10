@@ -15,9 +15,9 @@
           type: 'POST',
           dataType: 'json',
           contentType: 'application/json'
-        }).done(function() {
+        }).done(function(contact) {
           toastr.success('You have successfully created a new contact!', 'Success!');
-          _this.contacts.push(data);
+          _this.contacts.push(contact);
           return window.location.href = '#/';
         }).fail(function() {
           return toastr.error('There was an error creating your new contact.', '<sad face>');

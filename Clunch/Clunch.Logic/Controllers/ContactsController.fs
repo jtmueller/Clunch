@@ -9,6 +9,7 @@ open System.Linq
 open Raven.Client
 open Raven.Abstractions.Commands
 open Clunch.Models
+open Clunch
 
 type ContactsController(session) =
     inherit RavenApiController(session)
@@ -23,7 +24,10 @@ type ContactsController(session) =
 
     // POST /api/contacts
     member x.Post ([<FromBody>] contact:Contact) = 
-        session.StoreAsync(contact)
+        async {
+            do! session.AsyncStore(contact)
+            return contact
+        } |> Async.StartAsTask
 
     // DELETE
     member x.Delete ([<FromBody>] id:string) =

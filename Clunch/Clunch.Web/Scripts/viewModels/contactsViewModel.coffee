@@ -12,9 +12,9 @@
                 type: 'POST'
                 dataType: 'json'
                 contentType: 'application/json'
-            ).done(=>
+            ).done((contact) =>
                 toastr.success 'You have successfully created a new contact!', 'Success!'
-                @contacts.push data
+                @contacts.push contact
                 window.location.href = '#/'
             ).fail(->
                 toastr.error 'There was an error creating your new contact.', '<sad face>'
