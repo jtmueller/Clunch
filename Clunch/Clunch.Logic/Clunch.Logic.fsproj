@@ -44,6 +44,7 @@
     <Compile Include="Controllers\BaseControllers.fs" />
     <Compile Include="Controllers\HomeController.fs" />
     <Compile Include="Controllers\ContactsController.fs" />
+    <Compile Include="ServiceStackTextFormatter.fs" />
     <Compile Include="Global.fs" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -78,6 +79,10 @@
     </Reference>
     <Reference Include="Raven.Database">
       <HintPath>..\..\packages\RavenDB.Database.2.0.2261\lib\net40\Raven.Database.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\..\packages\ServiceStack.Text.3.9.38\lib\net35\ServiceStack.Text.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

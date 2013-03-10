@@ -2,9 +2,7 @@
 (function ( viewModel, $ ) {
     viewModel.ContactsViewModel = function ( contacts ) {
         var self = this;
-        self.contacts = ko.observableArray( ko.utils.arrayMap( contacts, function ( contact ) {
-            return { firstName: contact.firstName, lastName: contact.lastName, phone: contact.phone };
-        }));
+        self.contacts = ko.observableArray(contacts);
 
         self.addContact = function () {
             var data = appFsMvc.utility.serializeObject( $("#contactForm") );

@@ -127,3 +127,4 @@ type Global() =
         Global.RegisterGlobalFilters GlobalFilters.Filters
         BundleConfig.RegisterBundles BundleTable.Bundles
         AutofacConfig.Register GlobalConfiguration.Configuration
+        ServiceStackTextFormatter.Register GlobalConfiguration.Configuration
