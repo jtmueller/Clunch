@@ -40,3 +40,5 @@ module RavenExtensions =
         member x.AsyncToList() =
             x.ToListAsync() |> Async.AwaitTask
 
+    // TODO: Raven's object-uniqueness enforcement prevents using Records. Fix is here:
+    // https://groups.google.com/forum/?fromgroups=#!topic/ravendb/1_97gnJ3JYE

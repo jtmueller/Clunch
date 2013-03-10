@@ -7,6 +7,7 @@ open System.Net.Http
 open System.Web.Http
 open System.Linq
 open Raven.Client
+open Raven.Abstractions.Commands
 open Clunch.Models
 
 type ContactsController(session) =
@@ -23,3 +24,7 @@ type ContactsController(session) =
     // POST /api/contacts
     member x.Post ([<FromBody>] contact:Contact) = 
         session.StoreAsync(contact)
+
+    // DELETE
+    member x.Delete ([<FromBody>] id:string) =
+        session.Advanced.Defer(DeleteCommandData(Key=id))

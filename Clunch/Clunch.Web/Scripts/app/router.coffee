@@ -11,12 +11,18 @@
 
             # display all contacts
             @get '#/', ->
-                @render '/Templates/contactDetail.htm', {}, (html) ->
+                @render '/Templates/contactDetail.html', {}, (html) ->
                     self.renderTemplate html
             
             # display the create contacts view
             @get '#/create', ->
-                @render '/Templates/contactCreate.htm', {}, (html) ->
+                @render '/Templates/contactCreate.html', {}, (html) ->
+                    self.renderTemplate html
+
+            # display the edit contact view
+            @get '#/edit/contacts/:id', ->
+                self.contactViewModel.getContact @params['id']
+                @render '/Templates/contactEdit.html', {}, (html) ->
                     self.renderTemplate html
 
     $ ->

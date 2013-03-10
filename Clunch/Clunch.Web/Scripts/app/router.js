@@ -12,12 +12,18 @@
           return ko.applyBindings(_this.contactViewModel);
         };
         this.get('#/', function() {
-          return this.render('/Templates/contactDetail.htm', {}, function(html) {
+          return this.render('/Templates/contactDetail.html', {}, function(html) {
             return self.renderTemplate(html);
           });
         });
-        return this.get('#/create', function() {
-          return this.render('/Templates/contactCreate.htm', {}, function(html) {
+        this.get('#/create', function() {
+          return this.render('/Templates/contactCreate.html', {}, function(html) {
+            return self.renderTemplate(html);
+          });
+        });
+        return this.get('#/edit/contacts/:id', function() {
+          self.contactViewModel.getContact(this.params['id']);
+          return this.render('/Templates/contactEdit.html', {}, function(html) {
             return self.renderTemplate(html);
           });
         });

@@ -2,7 +2,7 @@
     <a href="#/create" role="button" class="btn btn-primary">Create Contact</a>
 </p>
 
-<table class="table span8">
+<table class="table table-hover span7">
     <thead>
         <tr>
             <th>First Name</th>
@@ -15,6 +15,12 @@
             <td data-bind="text: FirstName"></td>
             <td data-bind="text: LastName"></td>
             <td data-bind="text: Phone"></td>
+            <td>
+                <div class="btn-group">
+                    <a data-bind="attr: { href: '#/edit/' + Id }" class="btn btn-mini" title="Edit"><i class="icon-edit"></i> Edit</a>
+                    <button type="button" data-bind="click: $root.deleteContact" class="btn btn-mini" title="Delete"><i class="icon-trash"></i> Delete</button>
+                </div>
+            </td>
         </tr>
     </tbody>
 </table>

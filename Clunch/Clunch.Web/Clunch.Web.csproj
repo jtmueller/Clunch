@@ -211,8 +211,9 @@
     <Content Include="Scripts\viewModels\contactsViewModel.min.js">
       <DependentUpon>contactsViewModel.coffee</DependentUpon>
     </Content>
-    <Content Include="Templates\contactCreate.htm" />
-    <Content Include="Templates\contactDetail.htm" />
+    <Content Include="Templates\contactCreate.html" />
+    <Content Include="Templates\contactDetail.html" />
+    <Content Include="Templates\contactEdit.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
