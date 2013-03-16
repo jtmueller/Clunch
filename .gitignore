@@ -167,5 +167,6 @@ packages/*
 !packages/*.config
 
 Raven.Studio.xap
+RavenDB/*
 
 App_Data/
