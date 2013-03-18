@@ -47,8 +47,8 @@ type BundleConfig private () =
         |> bundles.Add
 
         StyleBundle("~/styles/bootstrap").Include(
-            "~/Content/bootstrap/bootstrap.*",
-            "~/Content/bootstrap/bootstrap-responsive.*")
+            "~/Content/bootstrap.*",
+            "~/Content/bootstrap-responsive.*")
         |> bundles.Add
 
         StyleBundle("~/styles/css").Include(
