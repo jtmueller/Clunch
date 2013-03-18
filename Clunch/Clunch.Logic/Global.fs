@@ -18,11 +18,6 @@ type BundleConfig private () =
             "~/Scripts/jquery-1*")
         |> bundles.Add
 
-        ScriptBundle("~/bundles/jqueryval").Include(
-            "~/Scripts/jquery.unobtrusive*",
-            "~/Scripts/jquery.validate*")
-        |> bundles.Add
-
         ScriptBundle("~/bundles/angular").Include(
             "~/Scripts/angular.*",
             "~/Scripts/angular-bootstrap.*",
