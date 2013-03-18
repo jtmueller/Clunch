@@ -6,21 +6,13 @@
   app = angular.module('clunch');
 
   app.controller('ContactDetail', [
-    '$scope', '$http', function($scope, $http) {
-      $http.get('/api/contacts').success(function(data) {
-        return $scope.contacts = data;
-      });
-      $scope.deleteContact = function(id) {
-        $scope.contacts = _.filter($scope.contacts, function(c) {
-          return c.Id !== id;
-        });
-        return $http["delete"]("/api/" + id, {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }).success(function() {
+    '$scope', 'Contact', function($scope, Contact) {
+      $scope.contacts = Contact.query();
+      $scope.deleteContact = function(contact) {
+        $scope.contacts.splice($scope.contacts.indexOf(contact), 1);
+        return contact.$delete(function() {
           return toastr.success('You have successfully deleted your contact!', 'Success!');
-        }).error(function() {
+        }, function() {
           console.log('Error: Delete Contact', arguments);
           return toastr.error('There was an error deleting your contact.', '<sad face>');
         });
@@ -29,13 +21,13 @@
   ]);
 
   app.controller('ContactCreate', [
-    '$scope', '$http', function($scope, $http) {
-      $scope.contact = {};
+    '$scope', 'Contact', function($scope, Contact) {
+      $scope.contact = new Contact();
       $scope.saveContact = function() {
-        return $http.post('/api/contacts', $scope.contact).success(function() {
+        return $scope.contact.$save(function() {
           toastr.success('You have successfully saved your contact!', 'Success!');
           return window.location.href = '#/contacts';
-        }).error(function() {
+        }, function() {
           console.log('Error: Create Contact', arguments);
           return toastr.error('There was an error saving your contact.', '<sad face>');
         });
@@ -44,16 +36,14 @@
   ]);
 
   app.controller('ContactEdit', [
-    '$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
-      $http.get("/api/contacts/" + $routeParams.id).success(function(data) {
-        return $scope.contact = data;
-      });
+    '$scope', '$routeParams', 'Contact', function($scope, $routeParams, Contact) {
+      $scope.contact = Contact.get($routeParams);
       $scope.saveContact = function() {
-        return $http.post('/api/contacts', $scope.contact).success(function() {
+        return $scope.contact.$save(function() {
           toastr.success('You have successfully saved your contact!', 'Success!');
           return window.location.href = '#/contacts';
-        }).error(function() {
-          console.log('Error: Create Contact', arguments);
+        }, function() {
+          console.log('Error: Edit Contact', arguments);
           return toastr.error('There was an error saving your contact.', '<sad face>');
         });
       };

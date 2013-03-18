@@ -2,4 +2,4 @@
 
 
 [<CLIMutable>]
-type Contact = { Id: string; FirstName: string; LastName: string; Phone: string }
+type Contact = { Id: int; FirstName: string; LastName: string; Phone: string }

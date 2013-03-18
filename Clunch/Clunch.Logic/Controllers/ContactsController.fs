@@ -1,9 +1,6 @@
 ﻿namespace Clunch.Controllers
 
-open System.Collections.Generic
-open System.Web
-open System.Web.Mvc
-open System.Net.Http
+open System
 open System.Web.Http
 open System.Linq
 open Raven.Client
@@ -15,11 +12,11 @@ type ContactsController(session) =
     inherit RavenApiController(session)
 
     // GET /api/contacts
-    member x.Get() = 
+    member x.Get() =
         (query {
             for contact in session.Query<Contact>() do
             sortBy contact.FirstName 
-            select contact           
+            select contact
         }).ToListAsync()
 
     // GET /api/contacts/1
@@ -33,6 +30,6 @@ type ContactsController(session) =
             return contact
         } |> Async.StartAsTask
 
-    // DELETE
+    // DELETE /api/contacts/1
     member x.Delete (id:int) =
         session.Advanced.Defer(DeleteCommandData(Key = sprintf "contacts/%i" id))

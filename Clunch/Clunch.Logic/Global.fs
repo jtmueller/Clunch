@@ -12,8 +12,10 @@ open System.IO
 
 type BundleConfig private () =
     static member RegisterBundles (bundles:BundleCollection) =
+        bundles.IgnoreList.Ignore("*.map")
+
         ScriptBundle("~/bundles/jquery").Include(
-            "~/Scripts/jquery-1*") 
+            "~/Scripts/jquery-1*")
         |> bundles.Add
 
         ScriptBundle("~/bundles/jqueryval").Include(
@@ -23,6 +25,7 @@ type BundleConfig private () =
 
         ScriptBundle("~/bundles/angular").Include(
             "~/Scripts/angular.*",
+            "~/Scripts/angular-loader.*",
             "~/Scripts/angular-resource.*",
             "~/Scripts/angular-sanitize.*",
             "~/Scripts/angular-cookies.*",

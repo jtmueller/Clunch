@@ -11,6 +11,8 @@ open Raven.Client.Connection.Async
 [<AutoOpen>]
 module RavenExtensions =
 
+    let inline asyncToList (q:IQueryable<_>) = q.ToListAsync() |> Async.AwaitTask
+
     type IAsyncDocumentSession with 
         member x.AsyncSaveChanges() =
             x.SaveChangesAsync() |> Async.AwaitEmptyTask

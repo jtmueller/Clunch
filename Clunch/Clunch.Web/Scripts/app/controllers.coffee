@@ -2,51 +2,49 @@
 
 app = angular.module 'clunch'
 
-app.controller 'ContactDetail', ['$scope', '$http', ($scope, $http) ->
-    $http.get('/api/contacts').success (data) ->
-        $scope.contacts = data
+app.controller 'ContactDetail', ['$scope', 'Contact', ($scope, Contact) ->
+    $scope.contacts = Contact.query()
 
-    $scope.deleteContact = (id) ->
-        $scope.contacts =
-            _.filter $scope.contacts, (c) -> c.Id != id
-
-        $http.delete("/api/#{id}",
-            headers: { 'Content-Type': 'application/json' })
-            .success(() -> toastr.success 'You have successfully deleted your contact!', 'Success!')
-            .error(() -> 
+    $scope.deleteContact = (contact) ->
+        $scope.contacts.splice $scope.contacts.indexOf(contact), 1
+        contact.$delete(
+            () -> toastr.success 'You have successfully deleted your contact!', 'Success!'
+            ,
+            () -> 
                 console.log 'Error: Delete Contact', arguments
                 toastr.error 'There was an error deleting your contact.', '<sad face>')
-
     return
 ]
 
-app.controller 'ContactCreate', ['$scope', '$http', ($scope, $http) ->
+app.controller 'ContactCreate', ['$scope', 'Contact', ($scope, Contact) ->
 
-    $scope.contact = {}
+    $scope.contact = new Contact()
 
     $scope.saveContact = () ->
-        $http.post('/api/contacts', $scope.contact)
-            .success(() -> 
+        $scope.contact.$save(
+            () ->
                 toastr.success 'You have successfully saved your contact!', 'Success!'
-                window.location.href = '#/contacts')
-            .error(() ->
+                window.location.href = '#/contacts'
+            ,
+            () ->
                 console.log 'Error: Create Contact', arguments
                 toastr.error 'There was an error saving your contact.', '<sad face>')
 
     return
 ]
 
-app.controller 'ContactEdit', ['$scope', '$routeParams', '$http', ($scope, $routeParams, $http) ->
-    $http.get("/api/contacts/#{ $routeParams.id }").success (data) ->
-        $scope.contact = data
+app.controller 'ContactEdit', ['$scope', '$routeParams', 'Contact', ($scope, $routeParams, Contact) ->
+
+    $scope.contact = Contact.get $routeParams
 
     $scope.saveContact = () ->
-        $http.post('/api/contacts', $scope.contact)
-            .success(() -> 
+        $scope.contact.$save(
+            () -> 
                 toastr.success 'You have successfully saved your contact!', 'Success!'
-                window.location.href = '#/contacts')
-            .error(() ->
-                console.log 'Error: Create Contact', arguments
+                window.location.href = '#/contacts'
+            ,
+            () ->
+                console.log 'Error: Edit Contact', arguments
                 toastr.error 'There was an error saving your contact.', '<sad face>')
 
     return

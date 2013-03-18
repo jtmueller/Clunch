@@ -1,6 +1,6 @@
 ﻿'use strict'
 
-angular.module('clunch', [])
+angular.module('clunch', ['clunchServices'])
     .config(['$routeProvider', ($routeProvider) ->
         $routeProvider
             .when('/contacts',
