@@ -3,18 +3,18 @@
         <legend>Edit Contact</legend>
 
         <div>
-            <input name="FirstName" type="text" placeholder="First Name" required ng-model="contact.FirstName"/>
+            <input name="FirstName" type="text" placeholder="First Name" ng-required="true" ng-model="contact.FirstName"/>
             <i class="icon-flag" title="This field is required." ng-show="thisForm.FirstName.$error.required"></i>
         </div>
 
         <div>
-            <input name="LastName" type="text" placeholder="Last Name" required ng-model="contact.LastName" />
+            <input name="LastName" type="text" placeholder="Last Name" ng-required="true" ng-model="contact.LastName" />
             <i class="icon-flag" title="This field is required." ng-show="thisForm.LastName.$error.required"></i>
         </div>
 
         <div>
-            <input name="Phone" type="text" placeholder="Phone" required ng-model="contact.Phone" />
-            <i class="icon-flag" title="This field is required." ng-show="thisForm.Phone.$error.required"></i>
+            <input name="Phone" type="tel" placeholder="Phone" ng-pattern="/^[0-9+\(\)#\.\s\/\-a-zA-Z]+$/" ng-required="true" ng-model="contact.Phone" />
+            <i class="icon-flag" title="Please enter a valid phone number." ng-show="thisForm.Phone.$error.required || thisForm.Phone.$error.pattern"></i>
         </div>
         <p>
             <input type="button" class="btn" value="Save" ng-click="saveContact()" ng-disabled="thisForm.$invalid" />
