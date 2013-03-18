@@ -1,5 +1,5 @@
 ﻿<p class="row">
-    <a href="#/create" role="button" class="btn btn-primary">Create Contact</a>
+    <a href="#/contacts/create" role="button" class="btn btn-primary">Create Contact</a>
 </p>
 
 <table class="table table-hover span7 contactList">
@@ -10,15 +10,15 @@
             <th>Phone</th>
         </tr>
     </thead>
-    <tbody data-bind="foreach: contacts">
-        <tr>
-            <td data-bind="text: FirstName"></td>
-            <td data-bind="text: LastName"></td>
-            <td data-bind="text: Phone"></td>
+    <tbody>
+        <tr ng-repeat="contact in contacts | orderBy:FirstName">
+            <td>{{ contact.FirstName }}</td>
+            <td>{{ contact.LastName }}</td>
+            <td>{{ contact.Phone }}</td>
             <td>
                 <div class="btn-group">
-                    <a data-bind="attr: { href: '#/edit/' + Id }" class="btn btn-mini" title="Edit"><i class="icon-edit"></i> Edit</a>
-                    <button type="button" data-bind="click: $root.deleteContact" class="btn btn-mini" title="Delete"><i class="icon-trash"></i> Delete</button>
+                    <a href="#/contacts/edit{{ contact.Id.substr(contact.Id.indexOf('/')) }}" class="btn btn-mini" title="Edit"><i class="icon-edit"></i> Edit</a>
+                    <button type="button" ng-click="deleteContact(contact.Id)" class="btn btn-mini" title="Delete"><i class="icon-trash"></i> Delete</button>
                 </div>
             </td>
         </tr>

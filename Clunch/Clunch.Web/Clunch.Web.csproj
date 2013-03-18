@@ -146,10 +146,16 @@
   <ItemGroup>
     <Content Include="404.html" />
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
@@ -163,30 +169,62 @@
     <Content Include="Images\glyphicons-halflings-white.png" />
     <Content Include="Images\glyphicons-halflings.png" />
     <Content Include="example.html" />
-    <Content Include="Scripts\app\main.js">
-      <DependentUpon>main.coffee</DependentUpon>
+    <Content Include="Scripts\angular-bootstrap-prettify.js" />
+    <Content Include="Scripts\angular-bootstrap-prettify.min.js" />
+    <Content Include="Scripts\angular-bootstrap.js" />
+    <Content Include="Scripts\angular-bootstrap.min.js" />
+    <Content Include="Scripts\angular-cookies.js" />
+    <Content Include="Scripts\angular-cookies.min.js" />
+    <Content Include="Scripts\angular-loader.js" />
+    <Content Include="Scripts\angular-loader.min.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-resource.js" />
+    <Content Include="Scripts\angular-resource.min.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular-scenario.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\app.js">
+      <DependentUpon>app.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\main.min.js">
-      <DependentUpon>main.coffee</DependentUpon>
+    <Content Include="Scripts\app\app.min.js">
+      <DependentUpon>app.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\router.js">
-      <DependentUpon>router.coffee</DependentUpon>
+    <Content Include="Scripts\app\controllers.js">
+      <DependentUpon>controllers.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\router.min.js">
-      <DependentUpon>router.coffee</DependentUpon>
+    <Content Include="Scripts\app\controllers.min.js">
+      <DependentUpon>controllers.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\main.coffee" />
-    <Content Include="Scripts\app\router.coffee" />
-    <Content Include="Scripts\app\utility.coffee" />
+    <Content Include="Scripts\app\directives.js">
+      <DependentUpon>directives.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app\directives.min.js">
+      <DependentUpon>directives.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app\filters.js">
+      <DependentUpon>filters.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app\filters.min.js">
+      <DependentUpon>filters.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app\app.coffee" />
+    <Content Include="Scripts\app\controllers.coffee" />
+    <Content Include="Scripts\app\directives.coffee" />
+    <Content Include="Scripts\app\filters.coffee" />
+    <Content Include="Scripts\app\services.coffee" />
+    <Content Include="Scripts\angular-bootstrap.min.js.map">
+      <DependentUpon>angular-bootstrap.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\app\utility.js">
-      <DependentUpon>utility.coffee</DependentUpon>
+    <Content Include="Scripts\app\services.js">
+      <DependentUpon>services.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\utility.min.js">
-      <DependentUpon>utility.coffee</DependentUpon>
+    <Content Include="Scripts\app\services.min.js">
+      <DependentUpon>services.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\i18n\angular-locale_en-us.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -196,21 +234,16 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-2.2.1.debug.js" />
-    <Content Include="Scripts\knockout-2.2.1.js" />
-    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
-    <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\jstd-scenario-adapter-config.js" />
+    <Content Include="Scripts\jstd-scenario-adapter.js" />
     <Content Include="Scripts\modernizr-2.6.2-respond-1.1.0.min.js" />
-    <Content Include="Scripts\sammy\sammy.js" />
     <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\ui-bootstrap-0.1.0-SNAPSHOT.js" />
+    <Content Include="Scripts\ui-bootstrap-0.1.0-SNAPSHOT.min.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.1.0-SNAPSHOT.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.1.0-SNAPSHOT.min.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\underscore.min.js" />
-    <Content Include="Scripts\viewModels\contactsViewModel.js">
-      <DependentUpon>contactsViewModel.coffee</DependentUpon>
-    </Content>
-    <Content Include="Scripts\viewModels\contactsViewModel.min.js">
-      <DependentUpon>contactsViewModel.coffee</DependentUpon>
-    </Content>
     <Content Include="Templates\contactCreate.html" />
     <Content Include="Templates\contactDetail.html" />
     <Content Include="Templates\contactEdit.html" />
@@ -249,7 +282,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\viewModels\contactsViewModel.coffee" />
+    <Content Include="Scripts\ui-bootstrap-0.1.0-SNAPSHOT.min.js.map">
+      <DependentUpon>ui-bootstrap-0.1.0-SNAPSHOT.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\ui-bootstrap-tpls-0.1.0-SNAPSHOT.min.js.map">
+      <DependentUpon>ui-bootstrap-tpls-0.1.0-SNAPSHOT.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

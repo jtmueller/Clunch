@@ -22,6 +22,10 @@ type ContactsController(session) =
             select contact           
         }).ToListAsync()
 
+    // GET /api/contacts/1
+    member x.Get(id:int) =
+        session.LoadAsync<Contact>(id)
+
     // POST /api/contacts
     member x.Post ([<FromBody>] contact:Contact) = 
         async {
@@ -30,5 +34,5 @@ type ContactsController(session) =
         } |> Async.StartAsTask
 
     // DELETE
-    member x.Delete ([<FromBody>] id:string) =
-        session.Advanced.Defer(DeleteCommandData(Key=id))
+    member x.Delete (id:int) =
+        session.Advanced.Defer(DeleteCommandData(Key = sprintf "contacts/%i" id))

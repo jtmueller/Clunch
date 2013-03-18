@@ -1,20 +1,18 @@
-﻿<form id="contactForm">
-    <fieldset>
-        <legend>Edit Contact</legend>
+﻿<fieldset>
+    <legend>Edit Contact</legend>
 
-        <div>
-            <input id="firstName" name="FirstName" type="text" placeholder="First Name" data-bind="value: activeContact.FirstName"/>
-        </div>
+    <div>
+        <input name="FirstName" type="text" placeholder="First Name" required="required" ng-model="contact.FirstName"/>
+    </div>
 
-        <div>
-            <input id="lastName" name="LastName" type="text" placeholder="Last Name" data-bind="value: activeContact.LastName"/>
-        </div>
+    <div>
+        <input name="LastName" type="text" placeholder="Last Name" required="required" ng-model="contact.LastName" />
+    </div>
 
-        <div>
-            <input id="phone" name="Phone" type="text" placeholder="Phone" data-bind="value: activeContact.Phone"/>
-        </div>
-        <p>
-            <input type="button" class="btn" value="Save" data-bind="click: updateContact" />
-        </p>
-    </fieldset>
-</form>
+    <div>
+        <input name="Phone" type="text" placeholder="Phone" required="required" ng-model="contact.Phone" />
+    </div>
+    <p>
+        <input type="button" class="btn" value="Save" ng-click="saveContact()" />
+    </p>
+</fieldset>

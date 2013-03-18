@@ -20,33 +20,31 @@ type BundleConfig private () =
             "~/Scripts/jquery.unobtrusive*",
             "~/Scripts/jquery.validate*")
         |> bundles.Add
+
+        ScriptBundle("~/bundles/angular").Include(
+            "~/Scripts/angular.*",
+            "~/Scripts/angular-resource.*",
+            "~/Scripts/angular-sanitize.*",
+            "~/Scripts/angular-cookies.*",
+            "~/Scripts/i18n/angular-locale_en-us.js")
+        |> bundles.Add
+
+        ScriptBundle("~/bundles/angular-bootstrap").Include(
+            "~/Scripts/angular-bootstrap.*",
+            "~/Scripts/ui-bootstrap-*")
+        |> bundles.Add
         
         ScriptBundle("~/bundles/extLibs").Include(
             "~/Scripts/underscore.js",   
-            "~/Scripts/toastr.js",
-            "~/Scripts/knockout-2.*",
-            "~/Scripts/knockout.mapping*",
-            "~/Scripts/bootstrap.*")
+            "~/Scripts/toastr.js")
         |> bundles.Add
 
-        if Directory.Exists(HttpContext.Current.Server.MapPath "/Scripts/models") then                                     
-            ScriptBundle("~/bundles/localApp").Include(
-                "~/Scripts/app/main.js",
-                "~/Scripts/app/utility.js",
-                "~/Scripts/models/*.js",
-                "~/Scripts/views/*.js",
-                "~/Scripts/app/router.js")
-            |> bundles.Add
-        else                                     
-            ScriptBundle("~/bundles/localApp").Include(
-                "~/Scripts/app/main.js",
-                "~/Scripts/app/utility.js",
-                "~/Scripts/viewModels/*.js",
-                "~/Scripts/app/router.js")
-            |> bundles.Add
-
-        ScriptBundle("~/bundles/sammy")
-            .IncludeDirectory("~/Scripts/Sammy", "*.js", true) 
+        ScriptBundle("~/bundles/app").Include(
+            "~/Scripts/app/app.js",
+            "~/Scripts/app/controllers.js",
+            "~/Scripts/app/directives.js",
+            "~/Scripts/app/filters.js",
+            "~/Scripts/app/services.js")
         |> bundles.Add
 
         ScriptBundle("~/bundles/modernizr").Include(
