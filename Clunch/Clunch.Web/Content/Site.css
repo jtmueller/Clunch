@@ -1,3 +1,13 @@
 ﻿body {
   padding-top: 10px;
 }
+table.contactList tr .btn-group {
+  opacity: 0.0;
+}
+table.contactList tr:hover .btn-group {
+  opacity: 1.0;
+  -moz-transition: opacity 750ms ease;
+  -o-transition: opacity 750ms ease;
+  -webkit-transition: opacity 750ms ease;
+  transition: opacity 750ms ease;
+}
