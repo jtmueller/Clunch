@@ -25,6 +25,7 @@ type BundleConfig private () =
 
         ScriptBundle("~/bundles/angular").Include(
             "~/Scripts/angular.*",
+            "~/Scripts/angular-bootstrap.*",
             "~/Scripts/angular-loader.*",
             "~/Scripts/angular-resource.*",
             "~/Scripts/angular-sanitize.*",
@@ -33,7 +34,6 @@ type BundleConfig private () =
         |> bundles.Add
 
         ScriptBundle("~/bundles/angular-bootstrap").Include(
-            "~/Scripts/angular-bootstrap.*",
             "~/Scripts/ui-bootstrap-*")
         |> bundles.Add
         
