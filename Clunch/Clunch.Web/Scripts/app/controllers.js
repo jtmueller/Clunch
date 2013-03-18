@@ -5,7 +5,7 @@
 
   app = angular.module('clunch');
 
-  app.controller('ContactDetail', [
+  app.controller('ContactList', [
     '$scope', 'Contact', function($scope, Contact) {
       $scope.contacts = Contact.query();
       $scope.deleteContact = function(contact) {

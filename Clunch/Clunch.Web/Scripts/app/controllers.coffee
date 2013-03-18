@@ -2,7 +2,7 @@
 
 app = angular.module 'clunch'
 
-app.controller 'ContactDetail', ['$scope', 'Contact', ($scope, Contact) ->
+app.controller 'ContactList', ['$scope', 'Contact', ($scope, Contact) ->
     $scope.contacts = Contact.query()
 
     $scope.deleteContact = (contact) ->
