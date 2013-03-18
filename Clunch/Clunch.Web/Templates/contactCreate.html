@@ -1,18 +1,23 @@
-﻿<fieldset>
-    <legend>Create New Contact</legend>
+﻿<form name="thisForm">
+    <fieldset>
+        <legend>Create New Contact</legend>
 
-    <div>
-        <input name="FirstName" type="text" placeholder="First Name" required="required" ng-model="contact.FirstName" />
-    </div>
+        <div>
+            <input name="FirstName" type="text" placeholder="First Name" required ng-model="contact.FirstName"  />
+            <i class="icon-flag" title="This field is required." ng-show="thisForm.FirstName.$error.required"></i>
+        </div>
 
-    <div>
-        <input name="LastName" type="text" placeholder="Last Name" required="required" ng-model="contact.LastName" />
-    </div>
+        <div>
+            <input name="LastName" type="text" placeholder="Last Name" required ng-model="contact.LastName" />
+            <i class="icon-flag" title="This field is required." ng-show="thisForm.LastName.$error.required"></i>
+        </div>
 
-    <div>
-        <input name="Phone" type="text" placeholder="Phone" required="required" ng-model="contact.Phone"/>
-    </div>
-    <p>
-        <input type="button" class="btn" value="Save" ng-click="saveContact()" />
-    </p>
-</fieldset>
+        <div>
+            <input name="Phone" type="text" placeholder="Phone" required ng-model="contact.Phone"/>
+            <i class="icon-flag" title="This field is required." ng-show="thisForm.Phone.$error.required"></i>
+        </div>
+        <p>
+            <input type="button" class="btn" value="Save" ng-click="saveContact()" ng-disabled="thisForm.$invalid" />
+        </p>
+    </fieldset>
+</form>
