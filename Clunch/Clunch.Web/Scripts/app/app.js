@@ -1,7 +1,7 @@
 ﻿(function() {
   'use strict';
 
-  angular.module('clunch', ['clunchServices']).config([
+  angular.module('clunch', ['clunchServices', 'ui.bootstrap']).config([
     '$routeProvider', function($routeProvider) {
       return $routeProvider.when('/contacts', {
         templateUrl: 'Templates/contactList.html',

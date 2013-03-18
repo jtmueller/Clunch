@@ -30,13 +30,10 @@ type BundleConfig private () =
             "~/Scripts/angular-resource.*",
             "~/Scripts/angular-sanitize.*",
             "~/Scripts/angular-cookies.*",
+            "~/Scripts/ui-bootstrap-tpls-*",
             "~/Scripts/i18n/angular-locale_en-us.js")
         |> bundles.Add
-
-        ScriptBundle("~/bundles/angular-bootstrap").Include(
-            "~/Scripts/ui-bootstrap-*")
-        |> bundles.Add
-        
+       
         ScriptBundle("~/bundles/extLibs").Include(
             "~/Scripts/underscore.js",   
             "~/Scripts/toastr.js")

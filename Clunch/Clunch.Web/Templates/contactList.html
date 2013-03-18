@@ -2,26 +2,27 @@
     <a href="#/contacts/create" role="button" class="btn btn-primary">Create Contact</a>
 </p>
 
-<table class="table table-hover span7 contactList">
-    <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="contact in contacts">
-            <td>{{ contact.FirstName }}</td>
-            <td>{{ contact.LastName }}</td>
-            <td>{{ contact.Phone }}</td>
-            <td>
-                <div class="btn-group">
-                    <a href="#/contacts/edit/{{ contact.Id }}" class="btn btn-mini" title="Edit"><i class="icon-edit"></i> Edit</a>
-                    <button type="button" ng-click="deleteContact(contact)" class="btn btn-mini" title="Delete"><i class="icon-trash"></i> Delete</button>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
+<div class="row">
+    <table class="table table-hover span7 contactList">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="contact in contacts">
+                <td>{{ contact.FirstName }}</td>
+                <td>{{ contact.LastName }}</td>
+                <td>{{ contact.Phone }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="#/contacts/edit/{{ contact.Id }}" class="btn btn-mini" title="Edit"><i class="icon-edit"></i> Edit</a>
+                        <button type="button" ng-click="deleteContact(contact)" class="btn btn-mini" title="Delete"><i class="icon-trash"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
