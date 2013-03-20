@@ -11,3 +11,12 @@ table.contactList tr:hover .btn-group {
   -webkit-transition: opacity 750ms ease;
   transition: opacity 750ms ease;
 }
+.chatBox {
+  height: 300px;
+  overflow: auto;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 4px;
+  -webkit-box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+}

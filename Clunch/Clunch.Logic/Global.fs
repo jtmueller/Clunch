@@ -9,6 +9,15 @@ open System.Web.Http
 open System.Data.Entity
 open System.Web.Optimization
 open System.IO
+open Microsoft.AspNet.SignalR
+
+open Autofac
+open Autofac.Integration.Mvc
+open Autofac.Integration.WebApi
+open Raven.Client
+open Raven.Client.Document
+open Raven.Client.Document.Async
+open Raven.Database.Server
 
 type BundleConfig private () =
     static member RegisterBundles (bundles:BundleCollection) =
@@ -30,6 +39,7 @@ type BundleConfig private () =
         |> bundles.Add
        
         ScriptBundle("~/bundles/extLibs").Include(
+            "~/Scripts/jquery.signalR-*",
             "~/Scripts/underscore.js",   
             "~/Scripts/toastr.js")
         |> bundles.Add
@@ -58,14 +68,6 @@ type BundleConfig private () =
         |> bundles.Add
 
 
-open Autofac
-open Autofac.Integration.Mvc
-open Autofac.Integration.WebApi
-open Raven.Client
-open Raven.Client.Document
-open Raven.Client.Document.Async
-open Raven.Database.Server
-
 type AutofacConfig private () =
     static member Register config =
         let builder = Autofac.ContainerBuilder()
@@ -86,6 +88,8 @@ type AutofacConfig private () =
 
         builder.Register<IAsyncDocumentSession>(fun (c:IComponentContext) -> c.Resolve<IDocumentStore>().OpenAsyncSession())
             .InstancePerHttpRequest() |> ignore
+
+        builder.RegisterType<ServiceStackSerializer>().As<Json.IJsonSerializer>().SingleInstance() |> ignore
 
         let container = builder.Build()
 
@@ -108,6 +112,8 @@ type Global() =
         filters.Add(new HandleErrorAttribute())
 
     static member RegisterRoutes(routes:RouteCollection) =
+        routes.MapHubs() |> ignore
+
         routes.IgnoreRoute( "{resource}.axd/{*pathInfo}" )
         routes.MapHttpRoute( "DefaultApi", "api/{controller}/{id}", 
             { id = RouteParameter.Optional } ) |> ignore
@@ -115,9 +121,9 @@ type Global() =
             { controller = "Home"; action = "Index"; id = UrlParameter.Optional } ) |> ignore
 
     member this.Application_Start(sender:obj, e:EventArgs) =
-        AreaRegistration.RegisterAllAreas()
+        AutofacConfig.Register GlobalConfiguration.Configuration
         Global.RegisterRoutes RouteTable.Routes
+        AreaRegistration.RegisterAllAreas()
         Global.RegisterGlobalFilters GlobalFilters.Filters
         BundleConfig.RegisterBundles BundleTable.Bundles
-        AutofacConfig.Register GlobalConfiguration.Configuration
         ServiceStackTextFormatter.Register GlobalConfiguration.Configuration

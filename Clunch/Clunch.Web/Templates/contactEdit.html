@@ -3,18 +3,18 @@
         <legend>Edit Contact</legend>
 
         <div>
-            <input name="FirstName" type="text" placeholder="First Name" ng-required="true" ng-model="contact.FirstName"/>
-            <i class="icon-flag icon-white" tooltip="This field is required." ng-show="thisForm.FirstName.$error.required"></i>
+            <input name="FirstName" type="text" placeholder="First Name" data-ng-required="true" ng-model="contact.FirstName"/>
+            <i class="icon-flag icon-white" data-tooltip="This field is required." data-tooltip-placement="right" ng-show="thisForm.FirstName.$error.required"></i>
         </div>
 
         <div>
-            <input name="LastName" type="text" placeholder="Last Name" ng-required="true" ng-model="contact.LastName" />
-            <i class="icon-flag icon-white" tooltip="This field is required." ng-show="thisForm.LastName.$error.required"></i>
+            <input name="LastName" type="text" placeholder="Last Name" data-ng-required="true" ng-model="contact.LastName" />
+            <i class="icon-flag icon-white" data-tooltip="This field is required." data-tooltip-placement="right" ng-show="thisForm.LastName.$error.required"></i>
         </div>
 
         <div>
-            <input name="Phone" type="tel" placeholder="Phone" ng-pattern="/^[0-9+\(\)#\.\s\/\-a-zA-Z]+$/" ng-required="true" ng-model="contact.Phone" />
-            <i class="icon-flag icon-white" tooltip="Please enter a valid phone number." ng-show="thisForm.Phone.$error.required || thisForm.Phone.$error.pattern"></i>
+            <input name="Phone" type="tel" placeholder="Phone" data-ng-pattern="/^[0-9+\(\)#\.\s\/\-a-zA-Z]+$/" data-ng-required="true" ng-model="contact.Phone" />
+            <i class="icon-flag icon-white" data-tooltip="Please enter a valid phone number." data-tooltip-placement="right" ng-show="thisForm.Phone.$error.required || thisForm.Phone.$error.pattern"></i>
         </div>
         <p>
             <input type="button" class="btn" value="Save" ng-click="saveContact()" ng-disabled="thisForm.$invalid" />

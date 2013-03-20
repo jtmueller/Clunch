@@ -35,3 +35,14 @@ type ServiceStackTextFormatter() as this =
         config.Formatters.RemoveAt 0
         config.Formatters.Insert(0, new ServiceStackTextFormatter())
 
+
+type ServiceStackSerializer() =
+    
+    interface Microsoft.AspNet.SignalR.Json.IJsonSerializer with
+        member x.Parse(json, theType) =
+            JsonSerializer.DeserializeFromString(json, theType)
+
+        member x.Serialize(value, writer) =
+            JsonSerializer.SerializeToWriter(value, writer)
+
+        
