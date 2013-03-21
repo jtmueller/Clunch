@@ -25,8 +25,8 @@ type BundleConfig private () =
         bundles.IgnoreList.Ignore("*.coffee")
 
         ScriptBundle("~/bundles/jquery").Include(
-            "~/Scripts/jquery-{version}.js")
-        |> bundles.Add
+            "~/Scripts/jquery-{version}.js"
+        ) |> bundles.Add
 
         ScriptBundle("~/bundles/angular").Include(
             "~/Scripts/angular.js",
@@ -36,14 +36,14 @@ type BundleConfig private () =
             "~/Scripts/angular-sanitize.js",
             "~/Scripts/angular-cookies.js",
             "~/Scripts/ui-bootstrap-tpls-*",
-            "~/Scripts/i18n/angular-locale_en-us.js")
-        |> bundles.Add
+            "~/Scripts/i18n/angular-locale_en-us.js"
+        ) |> bundles.Add
        
         ScriptBundle("~/bundles/extLibs").Include(
             "~/Scripts/jquery.signalR-{version}.js",
             "~/Scripts/underscore.js",   
-            "~/Scripts/toastr.js")
-        |> bundles.Add
+            "~/Scripts/toastr.js"
+        ) |> bundles.Add
 
         ScriptBundle("~/bundles/app").Include(
             "~/Scripts/app/services.js",
@@ -54,19 +54,19 @@ type BundleConfig private () =
         ) |> bundles.Add
 
         ScriptBundle("~/bundles/modernizr").Include(
-            "~/Scripts/modernizr-*") 
-        |> bundles.Add
+            "~/Scripts/modernizr-*"
+        ) |> bundles.Add
 
         StyleBundle("~/styles/bootstrap").Include(
             "~/Content/bootstrap.css",
-            "~/Content/bootstrap-responsive.css")
-        |> bundles.Add
+            "~/Content/bootstrap-responsive.css"
+        ) |> bundles.Add
 
         StyleBundle("~/styles/css").Include(
             "~/Content/toastr.css",
             "~/Content/toastr-responsive.css",
-            "~/Content/Site.css") 
-        |> bundles.Add
+            "~/Content/Site.css"
+        ) |> bundles.Add
 
 
 type AutofacConfig private () =
