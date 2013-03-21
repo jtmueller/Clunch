@@ -10,3 +10,4 @@ services.factory 'ClunchHub', () ->
     clunchHub = $.connection.clunchHub
     $.connection.hub.start()
     clunchHub
+

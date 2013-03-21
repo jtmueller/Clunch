@@ -226,6 +226,13 @@
     <Content Include="Scripts\angular-bootstrap.min.js.map">
       <DependentUpon>angular-bootstrap.js</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Clunch Local.pubxml" />
+    <Content Include="Scripts\app\app.min.js.map">
+      <DependentUpon>app.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app\directives.min.js.map">
+      <DependentUpon>directives.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\app\services.js">
       <DependentUpon>services.coffee</DependentUpon>
