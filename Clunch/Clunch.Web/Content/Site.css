@@ -32,19 +32,19 @@ table.contactList tr:hover .btn-group {
   -ms-transform: perspective(500px) rotateY(0deg);
   -o-transform: perspective(500px) rotateY(0deg);
   transform: perspective(800px) rotateY(0deg);
+  -webkit-transition: all 750ms ease-in-out;
   -moz-transition: all 750ms ease-in-out;
   -o-transition: all 750ms ease-in-out;
-  -webkit-transition: all 750ms ease-in-out;
   transition: all 750ms ease-in-out;
 }
 .chatBox:hover {
+  -webkit-transform: perspective(800px) rotateY(33deg);
   -moz-transform: perspective(800px) rotateY(33deg);
   -ms-transform: perspective(800px) rotateY(33deg);
   -o-transform: perspective(800px) rotateY(33deg);
-  -webkit-transform: perspective(800px) rotateY(33deg);
   transform: perspective(800px) rotateY(33deg);
+  -webkit-transition: all 750ms ease-in-out;
   -moz-transition: all 750ms ease-in-out;
   -o-transition: all 750ms ease-in-out;
-  -webkit-transition: all 750ms ease-in-out;
   transition: all 750ms ease-in-out;
 }
