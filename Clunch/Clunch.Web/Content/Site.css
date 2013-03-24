@@ -19,4 +19,32 @@ table.contactList tr:hover .btn-group {
   padding: 4px;
   -webkit-box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+  -webkit-backface-visibility: visible;
+  -moz-backface-visibility: visible;
+  backface-visibility: visible;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-transform: perspective(500px) rotateY(0deg);
+  -moz-transform: perspective(500px) rotateY(0deg);
+  -ms-transform: perspective(500px) rotateY(0deg);
+  -o-transform: perspective(500px) rotateY(0deg);
+  transform: perspective(800px) rotateY(0deg);
+  -moz-transition: all 750ms ease-in-out;
+  -o-transition: all 750ms ease-in-out;
+  -webkit-transition: all 750ms ease-in-out;
+  transition: all 750ms ease-in-out;
+}
+.chatBox:hover {
+  -moz-transform: perspective(800px) rotateY(33deg);
+  -ms-transform: perspective(800px) rotateY(33deg);
+  -o-transform: perspective(800px) rotateY(33deg);
+  -webkit-transform: perspective(800px) rotateY(33deg);
+  transform: perspective(800px) rotateY(33deg);
+  -moz-transition: all 750ms ease-in-out;
+  -o-transition: all 750ms ease-in-out;
+  -webkit-transition: all 750ms ease-in-out;
+  transition: all 750ms ease-in-out;
 }
