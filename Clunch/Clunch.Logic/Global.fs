@@ -18,6 +18,7 @@ open Raven.Client
 open Raven.Client.Document
 open Raven.Client.Document.Async
 open Raven.Database.Server
+open Elmah.Contrib.WebApi
 
 type BundleConfig private () =
     static member RegisterBundles (bundles:BundleCollection) =
@@ -129,3 +130,4 @@ type Global() =
         Global.RegisterGlobalFilters GlobalFilters.Filters
         BundleConfig.RegisterBundles BundleTable.Bundles
         ServiceStackTextFormatter.Register GlobalConfiguration.Configuration
+        GlobalConfiguration.Configuration.Filters.Add(new ElmahHandleErrorApiAttribute())
