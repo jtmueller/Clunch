@@ -205,17 +205,17 @@
     <Content Include="Scripts\app\app.min.js">
       <DependentUpon>app.coffee</DependentUpon>
     </Content>
+    <Content Include="Scripts\app\console.js">
+      <DependentUpon>console.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app\console.min.js">
+      <DependentUpon>console.coffee</DependentUpon>
+    </Content>
     <Content Include="Scripts\app\controllers.js">
       <DependentUpon>controllers.coffee</DependentUpon>
     </Content>
     <Content Include="Scripts\app\controllers.min.js">
       <DependentUpon>controllers.coffee</DependentUpon>
-    </Content>
-    <Content Include="Scripts\app\directives.js">
-      <DependentUpon>directives.coffee</DependentUpon>
-    </Content>
-    <Content Include="Scripts\app\directives.min.js">
-      <DependentUpon>directives.coffee</DependentUpon>
     </Content>
     <Content Include="Scripts\app\filters.js">
       <DependentUpon>filters.coffee</DependentUpon>
@@ -225,7 +225,6 @@
     </Content>
     <Content Include="Scripts\app\app.coffee" />
     <Content Include="Scripts\app\controllers.coffee" />
-    <Content Include="Scripts\app\directives.coffee" />
     <Content Include="Scripts\app\filters.coffee" />
     <Content Include="Scripts\app\services.coffee" />
     <Content Include="Scripts\angular-bootstrap.min.js.map">
@@ -235,9 +234,7 @@
     <Content Include="Scripts\app\app.min.js.map">
       <DependentUpon>app.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\directives.min.js.map">
-      <DependentUpon>directives.js</DependentUpon>
-    </Content>
+    <Content Include="Scripts\app\console.coffee" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\app\services.js">
       <DependentUpon>services.coffee</DependentUpon>

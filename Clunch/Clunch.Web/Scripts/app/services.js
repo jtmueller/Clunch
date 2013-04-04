@@ -13,11 +13,4 @@
     }
   ]);
 
-  services.factory('ClunchHub', function() {
-    var clunchHub;
-    clunchHub = $.connection.clunchHub;
-    $.connection.hub.start();
-    return clunchHub;
-  });
-
 }).call(this);

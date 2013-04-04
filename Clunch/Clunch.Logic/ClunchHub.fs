@@ -12,4 +12,4 @@ type ClunchHub() =
         x.Clients.All?addMessage(message)
 
     override x.OnConnected() =
-        x.Clients.All?addMessage(sprintf "Welcome %s!" x.Context.ConnectionId)
+        x.Clients.All?alertMessage("Connected", sprintf "Welcome %s!" x.Context.ConnectionId)

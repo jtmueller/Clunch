@@ -31,10 +31,10 @@ type BundleConfig private () =
         ScriptBundle("~/bundles/angular").Include(
             "~/Scripts/angular.js",
             "~/Scripts/angular-bootstrap.js",
-            "~/Scripts/angular-loader.js",
+            //"~/Scripts/angular-loader.js",
             "~/Scripts/angular-resource.js",
             "~/Scripts/angular-sanitize.js",
-            "~/Scripts/angular-cookies.js",
+            //"~/Scripts/angular-cookies.js",
             "~/Scripts/ui-bootstrap-tpls-{version}.js",
             "~/Scripts/i18n/angular-locale_en-us.js"
         ) |> bundles.Add
@@ -50,6 +50,7 @@ type BundleConfig private () =
             "~/Scripts/app/app.js",
             "~/Scripts/app/controllers.js",
             "~/Scripts/app/filters.js",
+            "~/Scripts/app/console.js",
             "~/Scripts/app/directives.js" // directives has to come last. maybe it's the embedded HTML, but in release/bundled mode, nothing after this file is included
         ) |> bundles.Add
 
