@@ -8,7 +8,7 @@
   services.factory('Contact', [
     '$resource', function($resource) {
       return $resource('api/contacts/:id', {
-        id: '@Id'
+        id: '@id'
       });
     }
   ]);

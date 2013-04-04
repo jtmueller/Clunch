@@ -8,7 +8,7 @@ class Console
         @output = @el.find '.console'
         @textBox = @el.find 'input[type="text"]'
         @el.find('form').submit @sendMessage
-        @el.find('input[type="button"]').click @sendSMessage
+        @el.find('input[type="button"]').click @sendMessage
 
         @hub = $.connection.clunchHub
         @hub.client.addMessage = @addMessage

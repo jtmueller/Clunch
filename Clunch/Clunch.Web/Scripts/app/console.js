@@ -16,7 +16,7 @@
       this.output = this.el.find('.console');
       this.textBox = this.el.find('input[type="text"]');
       this.el.find('form').submit(this.sendMessage);
-      this.el.find('input[type="button"]').click(this.sendSMessage);
+      this.el.find('input[type="button"]').click(this.sendMessage);
       this.hub = $.connection.clunchHub;
       this.hub.client.addMessage = this.addMessage;
       this.hub.client.alertMessage = this.alertMessage;

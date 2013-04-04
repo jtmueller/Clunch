@@ -12,7 +12,6 @@ type ServiceStackTextFormatter() as this =
     inherit MediaTypeFormatter()
 
     do
-        JsConfig.DateHandler <- JsonDateHandler.ISO8601
         this.SupportedMediaTypes.Add(MediaTypeHeaderValue("application/json"))
         this.SupportedEncodings.Add(UTF8Encoding(encoderShouldEmitUTF8Identifier=false, throwOnInvalidBytes=true))
         this.SupportedEncodings.Add(UnicodeEncoding(bigEndian=false, byteOrderMark=true, throwOnInvalidBytes=true))
@@ -32,6 +31,9 @@ type ServiceStackTextFormatter() as this =
         Task.Factory.StartNew(fun () -> JsonSerializer.SerializeToStream(value, theType, writeStream))
 
     static member Register (config:HttpConfiguration) =
+        JsConfig.DateHandler <- JsonDateHandler.ISO8601
+        JsConfig.EmitCamelCaseNames <- true
+
         config.Formatters.RemoveAt 0
         config.Formatters.Insert(0, new ServiceStackTextFormatter())
 
