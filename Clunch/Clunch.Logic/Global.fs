@@ -35,7 +35,7 @@ type BundleConfig private () =
             "~/Scripts/angular-resource.js",
             "~/Scripts/angular-sanitize.js",
             "~/Scripts/angular-cookies.js",
-            "~/Scripts/ui-bootstrap-tpls-*",
+            "~/Scripts/ui-bootstrap-tpls-{version}.js",
             "~/Scripts/i18n/angular-locale_en-us.js"
         ) |> bundles.Add
        
