@@ -7,7 +7,7 @@
         templateUrl: 'Templates/contactList.html',
         controller: 'ContactList'
       }).when('/contacts/create', {
-        templateUrl: 'Templates/contactCreate.html',
+        templateUrl: 'Templates/contactEdit.html',
         controller: 'ContactCreate'
       }).when('/contacts/edit/:id', {
         templateUrl: 'Templates/contactEdit.html',

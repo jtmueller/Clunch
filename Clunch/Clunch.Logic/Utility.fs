@@ -21,3 +21,7 @@ type Microsoft.FSharp.Control.Async with
 
 type System.String with
     member s.IsEmpty = String.IsNullOrWhiteSpace s
+
+type Autofac.Builder.IRegistrationBuilder<'a,'b,'c> with
+    /// A shorter alternative to piping everything to |> ignore.
+    member x.End() = ()

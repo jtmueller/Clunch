@@ -11,9 +11,18 @@ class Console
         @el.find('input[type="button"]').click @sendMessage
 
         @hub = $.connection.clunchHub
+
         @hub.client.addMessage = @addMessage
-        @hub.client.alertMessage = @alertMessage
+        @hub.client.log = (msg) -> console.log msg
+        @hub.client.success = (msg, title) -> toastr.success msg, title
+        @hub.client.info = (msg, title) -> toastr.info msg, title
+        @hub.client.warning = (msg, title) -> toastr.warning msg, title
+        @hub.client.error = (msg, title) -> 
+            toastr.warning.error msg, title
+            console.log msg
+
         $.connection.hub.start()
+            .fail((msg) -> toastr.error msg)
 
     addMessage: (message) =>
         @output.append $('<div/>').text message
@@ -23,14 +32,12 @@ class Console
         e.preventDefault()
         message = @textBox.val()
         return if message.length == 0
-        @hub.server.send message
+        try
+            @hub.server.send message
+        catch err
+            toastr.error err.message
         @textBox.val ''
         @textBox.focus()
-
-    alertMessage: (title, message) ->
-        #btns = [{result:'cancel', label: 'Cancel'}, {result:'ok', label: 'OK', cssClass: 'btn-primary'}];
-        #@dialog.messageBox(title, message, btns).open()
-        alert message
 
 
 app = angular.module 'clunch'

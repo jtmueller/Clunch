@@ -19,8 +19,25 @@
       this.el.find('input[type="button"]').click(this.sendMessage);
       this.hub = $.connection.clunchHub;
       this.hub.client.addMessage = this.addMessage;
-      this.hub.client.alertMessage = this.alertMessage;
-      $.connection.hub.start();
+      this.hub.client.log = function(msg) {
+        return console.log(msg);
+      };
+      this.hub.client.success = function(msg, title) {
+        return toastr.success(msg, title);
+      };
+      this.hub.client.info = function(msg, title) {
+        return toastr.info(msg, title);
+      };
+      this.hub.client.warning = function(msg, title) {
+        return toastr.warning(msg, title);
+      };
+      this.hub.client.error = function(msg, title) {
+        toastr.warning.error(msg, title);
+        return console.log(msg);
+      };
+      $.connection.hub.start().fail(function(msg) {
+        return toastr.error(msg);
+      });
     }
 
     Console.prototype.addMessage = function(message) {
@@ -35,13 +52,13 @@
       if (message.length === 0) {
         return;
       }
-      this.hub.server.send(message);
+      try {
+        this.hub.server.send(message);
+      } catch (err) {
+        toastr.error(err.message);
+      }
       this.textBox.val('');
       return this.textBox.focus();
-    };
-
-    Console.prototype.alertMessage = function(title, message) {
-      return alert(message);
     };
 
     return Console;

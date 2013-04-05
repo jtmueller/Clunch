@@ -23,6 +23,7 @@
   app.controller('ContactCreate', [
     '$scope', 'Contact', function($scope, Contact) {
       $scope.contact = new Contact();
+      $scope.title = "Create";
       $scope.saveContact = function() {
         return $scope.contact.$save(function() {
           toastr.success('You have successfully saved your contact!', 'Success!');
@@ -38,6 +39,7 @@
   app.controller('ContactEdit', [
     '$scope', '$routeParams', 'Contact', function($scope, $routeParams, Contact) {
       $scope.contact = Contact.get($routeParams);
+      $scope.title = "Edit";
       $scope.saveContact = function() {
         return $scope.contact.$save(function() {
           toastr.success('You have successfully saved your contact!', 'Success!');

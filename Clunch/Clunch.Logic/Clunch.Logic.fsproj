@@ -45,7 +45,8 @@
     <Compile Include="Controllers\HomeController.fs" />
     <Compile Include="Controllers\ContactsController.fs" />
     <Compile Include="ClunchHub.fs" />
-    <Compile Include="ServiceStackJson.fs" />
+    <Compile Include="AutofacSignalR.fs" />
+    <Compile Include="BundleConfig.fs" />
     <Compile Include="Global.fs" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -132,10 +133,6 @@
     </Reference>
     <Reference Include="Raven.Database">
       <HintPath>..\..\packages\RavenDB.Database.2.0.2330\lib\net40\Raven.Database.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\..\packages\ServiceStack.Text.3.9.43\lib\net35\ServiceStack.Text.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

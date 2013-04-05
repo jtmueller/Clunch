@@ -19,6 +19,7 @@ app.controller 'ContactList', ['$scope', 'Contact', ($scope, Contact) ->
 app.controller 'ContactCreate', ['$scope', 'Contact', ($scope, Contact) ->
 
     $scope.contact = new Contact()
+    $scope.title = "Create"
 
     $scope.saveContact = () ->
         $scope.contact.$save(
@@ -36,6 +37,7 @@ app.controller 'ContactCreate', ['$scope', 'Contact', ($scope, Contact) ->
 app.controller 'ContactEdit', ['$scope', '$routeParams', 'Contact', ($scope, $routeParams, Contact) ->
 
     $scope.contact = Contact.get $routeParams
+    $scope.title = "Edit"
 
     $scope.saveContact = () ->
         $scope.contact.$save(
