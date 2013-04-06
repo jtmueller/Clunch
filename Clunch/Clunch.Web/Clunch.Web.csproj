@@ -226,6 +226,7 @@
     <Content Include="Scripts\angular-bootstrap.min.js.map">
       <DependentUpon>angular-bootstrap.js</DependentUpon>
     </Content>
+    <Content Include="Content\prefixer.less" />
     <None Include="Properties\PublishProfiles\Clunch Local.pubxml" />
     <Content Include="Scripts\app\app.min.js.map">
       <DependentUpon>app.js</DependentUpon>
