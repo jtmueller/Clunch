@@ -29,12 +29,12 @@ type BundleConfig private () =
         ) |> bundles.Add
 
         ScriptBundle("~/bundles/app").Include(
-            "~/Scripts/app/services.js",
-            "~/Scripts/app/app.js",
-            "~/Scripts/app/controllers.js",
-            "~/Scripts/app/filters.js",
-            "~/Scripts/app/console.js",
-            "~/Scripts/app/directives.js" // directives has to come last. maybe it's the embedded HTML, but in release/bundled mode, nothing after this file is included
+            "~/AppScripts/services.js",
+            "~/AppScripts/app.js",
+            "~/AppScripts/controllers.js",
+            "~/AppScripts/filters.js",
+            "~/AppScripts/console.js",
+            "~/AppScripts/directives.js" // directives has to come last. maybe it's the embedded HTML, but in release/bundled mode, nothing after this file is included
         ) |> bundles.Add
 
         ScriptBundle("~/bundles/modernizr").Include(

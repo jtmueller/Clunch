@@ -195,45 +195,45 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\app\app.js">
+    <Content Include="AppScripts\app.js">
       <DependentUpon>app.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\app.min.js">
+    <Content Include="AppScripts\app.min.js">
       <DependentUpon>app.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\console.js">
+    <Content Include="AppScripts\console.js">
       <DependentUpon>console.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\console.min.js">
+    <Content Include="AppScripts\console.min.js">
       <DependentUpon>console.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\controllers.js">
+    <Content Include="AppScripts\controllers.js">
       <DependentUpon>controllers.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\controllers.min.js">
+    <Content Include="AppScripts\controllers.min.js">
       <DependentUpon>controllers.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\filters.js">
+    <Content Include="AppScripts\filters.js">
       <DependentUpon>filters.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\filters.min.js">
+    <Content Include="AppScripts\filters.min.js">
       <DependentUpon>filters.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\app.coffee" />
-    <Content Include="Scripts\app\controllers.coffee" />
-    <Content Include="Scripts\app\filters.coffee" />
-    <Content Include="Scripts\app\services.coffee" />
+    <Content Include="AppScripts\app.coffee" />
+    <Content Include="AppScripts\controllers.coffee" />
+    <Content Include="AppScripts\filters.coffee" />
+    <Content Include="AppScripts\services.coffee" />
     <Content Include="Content\prefixer.less" />
     <None Include="Properties\PublishProfiles\Clunch Local.pubxml" />
-    <Content Include="Scripts\app\app.min.js.map">
+    <Content Include="AppScripts\app.min.js.map">
       <DependentUpon>app.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\console.coffee" />
+    <Content Include="AppScripts\console.coffee" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\app\services.js">
+    <Content Include="AppScripts\services.js">
       <DependentUpon>services.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\services.min.js">
+    <Content Include="AppScripts\services.min.js">
       <DependentUpon>services.coffee</DependentUpon>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
@@ -297,6 +297,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Dialogs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
