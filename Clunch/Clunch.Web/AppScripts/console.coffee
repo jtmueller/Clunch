@@ -37,17 +37,37 @@ class Console
             @scope.messages.shift()
         @scope.$apply()
         @outputScroll.scrollTop(@outputScroll.prop 'scrollHeight')
-        #msgbox = @dialog.messageBox title ? "Success", message, [{label:'Yes, I\'m sure', result: 'yes'},{label:'Nope', result: 'no'}]
-        #msgbox.open().then (result) ->
-        #    console.log(result)
-        # this is needed to "pump the message loop" in angular so that promises resolve
-        #@scope.$apply()
 
-    login: () =>
-        name = prompt 'Who are you?', ''
-        if name?.length > 0
+    login: =>
+        dlg = @dialog.dialog
+            dialogClass: 'modal login'
+            backdropClick: false
+            keyboard: false
+            template: 
+                '''
+                <div class="modal-header"><h4>Who are you?</h4></div>
+                <div class="modal-body">
+                    <form name="loginForm">
+                        <input type="text" name="loginName" ng-model="name" required="required" size="30" maxlength="30" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn" ng-click="login()" ng-disabled="loginForm.$invalid" value="Sign In" />
+                </div>
+                '''
+            controller: ['$scope', 'dialog', ($scope, dialog) ->
+                dialog.modalEl.find('form').submit -> dialog.close $scope.name
+                $scope.login = -> dialog.close $scope.name
+                setTimeout ->
+                    dialog.modalEl.find('input[name="loginName"]').focus()
+                , 250
+            ]
+        dlg.open().then (name) =>
             @hub.server.login name
             @textBox.focus()
+        # This is needed to "pump the message loop" in angular so that 
+        # promises resolve and the dialog displays
+        @scope.$apply()
 
     sendMessage: (e) =>
         e.preventDefault()

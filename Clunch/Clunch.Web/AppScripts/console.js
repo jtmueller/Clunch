@@ -59,12 +59,32 @@
     };
 
     Console.prototype.login = function() {
-      var name;
-      name = prompt('Who are you?', '');
-      if ((name != null ? name.length : void 0) > 0) {
-        this.hub.server.login(name);
-        return this.textBox.focus();
-      }
+      var dlg,
+        _this = this;
+      dlg = this.dialog.dialog({
+        dialogClass: 'modal login',
+        backdropClick: false,
+        keyboard: false,
+        template: '<div class="modal-header"><h4>Who are you?</h4></div>\n<div class="modal-body">\n    <form name="loginForm">\n        <input type="text" name="loginName" ng-model="name" required="required" size="30" maxlength="30" />\n    </form>\n</div>\n<div class="modal-footer">\n    <input type="button" class="btn" ng-click="login()" ng-disabled="loginForm.$invalid" value="Sign In" />\n</div>',
+        controller: [
+          '$scope', 'dialog', function($scope, dialog) {
+            dialog.modalEl.find('form').submit(function() {
+              return dialog.close($scope.name);
+            });
+            $scope.login = function() {
+              return dialog.close($scope.name);
+            };
+            return setTimeout(function() {
+              return dialog.modalEl.find('input[name="loginName"]').focus();
+            }, 250);
+          }
+        ]
+      });
+      dlg.open().then(function(name) {
+        _this.hub.server.login(name);
+        return _this.textBox.focus();
+      });
+      return this.scope.$apply();
     };
 
     Console.prototype.sendMessage = function(e) {
