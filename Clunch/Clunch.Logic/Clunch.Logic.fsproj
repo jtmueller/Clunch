@@ -46,7 +46,7 @@
     <Compile Include="Controllers\HomeController.fs" />
     <Compile Include="Controllers\ContactsController.fs" />
     <Compile Include="ClunchHub.fs" />
-    <Compile Include="AutofacSignalR.fs" />
+    <Compile Include="SignalrExtensions.fs" />
     <Compile Include="BundleConfig.fs" />
     <Compile Include="Global.fs" />
     <None Include="packages.config" />

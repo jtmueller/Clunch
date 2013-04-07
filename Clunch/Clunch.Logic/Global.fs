@@ -81,6 +81,7 @@ type Global() =
         Global.RegisterGlobalFilters GlobalFilters.Filters
         BundleConfig.RegisterBundles BundleTable.Bundles
         GlobalConfiguration.Configuration.Filters.Add(new ElmahHandleErrorApiAttribute())
+        GlobalHost.HubPipeline.AddModule (ElmahPipelineModule()) |> ignore
 
         GlobalConfiguration.Configuration.Formatters
             .JsonFormatter.SerializerSettings.ContractResolver <- 
