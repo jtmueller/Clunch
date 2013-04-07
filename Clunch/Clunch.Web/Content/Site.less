@@ -17,7 +17,7 @@ table.contactList {
 
 .console {
     height: 300px;
-    overflow: auto;
+    overflow: hidden;
     border-radius: 5px;
     margin-bottom: 15px;
     padding: 4px;
@@ -27,11 +27,16 @@ table.contactList {
     .transform(perspective(800px) rotateY(0deg));
     .transition(all 750ms ease-in-out);
 
+    > div {
+        height: 100%;
+        overflow: auto;
+    }
+
     &:hover {
         .transform(perspective(800px) rotateY(33deg));
-        .transition(all 750ms ease-in-out);
     }
 }
+
 
 
         

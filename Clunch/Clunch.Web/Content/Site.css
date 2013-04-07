@@ -90,7 +90,7 @@ table.contactList tr:hover .btn-group {
 }
 .console {
   height: 300px;
-  overflow: auto;
+  overflow: hidden;
   border-radius: 5px;
   margin-bottom: 15px;
   padding: 4px;
@@ -115,14 +115,14 @@ table.contactList tr:hover .btn-group {
   -o-transition: all 750ms ease-in-out;
   transition: all 750ms ease-in-out;
 }
+.console > div {
+  height: 100%;
+  overflow: auto;
+}
 .console:hover {
   -webkit-transform: perspective(800px) rotateY(33deg);
   -moz-transform: perspective(800px) rotateY(33deg);
   -ms-transform: perspective(800px) rotateY(33deg);
   -o-transform: perspective(800px) rotateY(33deg);
   transform: perspective(800px) rotateY(33deg);
-  -webkit-transition: all 750ms ease-in-out;
-  -moz-transition: all 750ms ease-in-out;
-  -o-transition: all 750ms ease-in-out;
-  transition: all 750ms ease-in-out;
 }

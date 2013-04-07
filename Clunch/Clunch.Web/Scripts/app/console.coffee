@@ -3,9 +3,10 @@
 class Console
     constructor: ($scope, $element, $dialog) ->
         @scope = $scope
+        @scope.messages = []
         @el = $element
         @dialog = $dialog
-        @output = @el.find '.console'
+        @outputScroll = @el.find '.console > div'
         @textBox = @el.find 'input[type="text"]'
         @el.find('form').submit @sendMessage
         @el.find('input[type="button"]').click @sendMessage
@@ -27,10 +28,15 @@ class Console
                 console.error msg
                 toastr.error msg
 
-    addMessage: (name, message, className) =>
-        #TODO: consider using binding here?
-        @output.append $('<div/>').addClass(className).text "#{name}: #{message}"
-        @output.scrollTop(@output.prop 'scrollHeight')
+    addMessage: (name, text, className) =>
+        @scope.messages.push
+            user: name
+            text: text
+            className: className
+        if @scope.messages.length > 300
+            @scope.messages.shift()
+        @scope.$apply()
+        @outputScroll.scrollTop(@outputScroll.prop 'scrollHeight')
         #msgbox = @dialog.messageBox title ? "Success", message, [{label:'Yes, I\'m sure', result: 'yes'},{label:'Nope', result: 'no'}]
         #msgbox.open().then (result) ->
         #    console.log(result)
@@ -39,8 +45,9 @@ class Console
 
     login: () =>
         name = prompt 'Who are you?', ''
-        if name.length > 0
+        if name?.length > 0
             @hub.server.login name
+            @textBox.focus()
 
     sendMessage: (e) =>
         e.preventDefault()
@@ -49,6 +56,7 @@ class Console
         try
             @hub.server.send message
         catch err
+            console.error err
             toastr.error err.message
         @textBox.val ''
         @textBox.focus()
@@ -65,6 +73,9 @@ app.directive 'console', () ->
         <div>
             <div class="row-fluid">
                 <div class="span5 console">
+                    <div>
+                        <div ng-repeat="message in messages" ng-class="message.className"><b>{{message.user}}:</b> {{message.text}}</div>
+                    </div>
                 </div>
             </div>
             <div class="row-fluid">

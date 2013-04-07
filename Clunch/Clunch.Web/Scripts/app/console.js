@@ -13,9 +13,10 @@
 
       this.addMessage = __bind(this.addMessage, this);
       this.scope = $scope;
+      this.scope.messages = [];
       this.el = $element;
       this.dialog = $dialog;
-      this.output = this.el.find('.console');
+      this.outputScroll = this.el.find('.console > div');
       this.textBox = this.el.find('input[type="text"]');
       this.el.find('form').submit(this.sendMessage);
       this.el.find('input[type="button"]').click(this.sendMessage);
@@ -44,16 +45,25 @@
       });
     }
 
-    Console.prototype.addMessage = function(name, message, className) {
-      this.output.append($('<div/>').addClass(className).text("" + name + ": " + message));
-      return this.output.scrollTop(this.output.prop('scrollHeight'));
+    Console.prototype.addMessage = function(name, text, className) {
+      this.scope.messages.push({
+        user: name,
+        text: text,
+        className: className
+      });
+      if (this.scope.messages.length > 300) {
+        this.scope.messages.shift();
+      }
+      this.scope.$apply();
+      return this.outputScroll.scrollTop(this.outputScroll.prop('scrollHeight'));
     };
 
     Console.prototype.login = function() {
       var name;
       name = prompt('Who are you?', '');
-      if (name.length > 0) {
-        return this.hub.server.login(name);
+      if ((name != null ? name.length : void 0) > 0) {
+        this.hub.server.login(name);
+        return this.textBox.focus();
       }
     };
 
@@ -67,6 +77,7 @@
       try {
         this.hub.server.send(message);
       } catch (err) {
+        console.error(err);
         toastr.error(err.message);
       }
       this.textBox.val('');
@@ -84,7 +95,7 @@
       restrict: 'E',
       replace: true,
       scope: {},
-      template: '<div>\n    <div class="row-fluid">\n        <div class="span5 console">\n        </div>\n    </div>\n    <div class="row-fluid">\n        <form name="consoleForm" class="navbar-form pull-left span5">\n            <input type="text" class="span10" required />\n            <input type="button" class="btn span2" value="Send" ng-disabled="consoleForm.$invalid" />\n        </form>\n    </div>\n</div>',
+      template: '<div>\n    <div class="row-fluid">\n        <div class="span5 console">\n            <div>\n                <div ng-repeat="message in messages" ng-class="message.className"><b>{{message.user}}:</b> {{message.text}}</div>\n            </div>\n        </div>\n    </div>\n    <div class="row-fluid">\n        <form name="consoleForm" class="navbar-form pull-left span5">\n            <input type="text" class="span10" required />\n            <input type="button" class="btn span2" value="Send" ng-disabled="consoleForm.$invalid" />\n        </form>\n    </div>\n</div>',
       controller: ['$scope', '$element', '$dialog', Console],
       link: function(scope, element, attrs) {}
     };
