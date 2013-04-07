@@ -294,9 +294,6 @@
     <Content Include="Scripts\jquery-1.9.1.min.js.map">
       <DependentUpon>jquery-1.9.1.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\ui-bootstrap-tpls-0.2.0.min.js.map">
-      <DependentUpon>ui-bootstrap-tpls-0.2.0.js</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,6 +3,12 @@ module Clunch.Utility
 
 open System
 
+type Agent<'a> = MailboxProcessor<'a>
+
+module Async =
+    let AwaitEmptyTask (t:System.Threading.Tasks.Task) =
+        t |> Async.AwaitIAsyncResult |> Async.Ignore
+
 let inline isNull x = Object.ReferenceEquals(x, null)
 let inline isNotNull x = isNull x |> not
 
@@ -25,3 +31,4 @@ type System.String with
 type Autofac.Builder.IRegistrationBuilder<'a,'b,'c> with
     /// A shorter alternative to piping everything to |> ignore.
     member x.End() = ()
+

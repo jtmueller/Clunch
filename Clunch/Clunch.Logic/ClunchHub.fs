@@ -5,6 +5,7 @@ open System.Threading.Tasks
 open Microsoft.AspNet.SignalR
 open Autofac
 open ImpromptuInterface.FSharp
+open Clunch.Agents
 
 // https://code.google.com/p/autofac/wiki/SignalRIntegration
 
@@ -18,17 +19,40 @@ type ClunchHub(lifetimeScope:ILifetimeScope) =
     // TODO: scope.Resolve<T>() for any services we need here
 
     member x.Send(message:string) : Task =
-        x.Clients.All?addMessage(message)
+        try
+            let name : string = x.Clients.Caller?name
+            x.Clients.All?addMessage(name, message)
+        with
+        | :? NullReferenceException ->
+            x.Clients.Caller?login()
+
+    member x.Login(name:string) : Task =
+        let connId = Guid(x.Context.ConnectionId)
+        UserAgent.connect connId name
+        x.Clients.Caller?name <- name
+        x.Clients.Caller?success(sprintf "Welcome, %s!" name)
+        x.Clients.Others?info(sprintf "User '%s' has connected." name)
 
     override x.OnConnected() =
-        x.Clients.Caller?success(sprintf "Welcome %s!" x.Context.ConnectionId, "Connected")
-        x.Clients.Others?info(sprintf "Client connected: %s" x.Context.ConnectionId)
+        x.Clients.Caller?login()
 
-    override x.OnDisconnected() =
-        x.Clients.Others?warning(sprintf "Client %s has disconnected." x.Context.ConnectionId)
+    override x.OnDisconnected() = 
+        async {
+            let connId = Guid(x.Context.ConnectionId)
+            let! name = UserAgent.disconnect connId
+            x.Clients.Others?warning(sprintf "User '%s' has disconnected." (name |? "Unknown"))
+        } |> Async.StartAsTask :> Task
 
     override x.OnReconnected() =
-        x.Clients.Others?info(sprintf "Client %s has reconnected." x.Context.ConnectionId)
+        async {
+            let connId = Guid(x.Context.ConnectionId)
+            let! name = UserAgent.get connId
+            match name with
+            | Some n ->
+                x.Clients.Others?info(sprintf "User '%s' has reconnected." n)
+            | None ->
+                x.Clients.Caller?login()
+        } |> Async.StartAsTask :> Task
 
     override x.Dispose(disposing) =
         base.Dispose(disposing)

@@ -9,6 +9,8 @@
     function Console($scope, $element, $dialog) {
       this.sendMessage = __bind(this.sendMessage, this);
 
+      this.login = __bind(this.login, this);
+
       this.addMessage = __bind(this.addMessage, this);
       this.scope = $scope;
       this.el = $element;
@@ -19,6 +21,7 @@
       this.el.find('input[type="button"]').click(this.sendMessage);
       this.hub = $.connection.clunchHub;
       this.hub.client.addMessage = this.addMessage;
+      this.hub.client.login = this.login;
       this.hub.client.log = function(msg) {
         return console.log(msg);
       };
@@ -41,23 +44,17 @@
       });
     }
 
-    Console.prototype.addMessage = function(message, className) {
-      var msgbox;
-      this.output.append($('<div/>').addClass(className).text(message));
-      this.output.scrollTop(this.output.prop('scrollHeight'));
-      msgbox = this.dialog.messageBox(typeof title !== "undefined" && title !== null ? title : "Success", message, [
-        {
-          label: 'Yes, I\'m sure',
-          result: 'yes'
-        }, {
-          label: 'Nope',
-          result: 'no'
-        }
-      ]);
-      msgbox.open().then(function(result) {
-        return console.log(result);
-      });
-      return this.scope.$apply();
+    Console.prototype.addMessage = function(name, message, className) {
+      this.output.append($('<div/>').addClass(className).text("" + name + ": " + message));
+      return this.output.scrollTop(this.output.prop('scrollHeight'));
+    };
+
+    Console.prototype.login = function() {
+      var name;
+      name = prompt('Who are you?', '');
+      if (name.length > 0) {
+        return this.hub.server.login(name);
+      }
     };
 
     Console.prototype.sendMessage = function(e) {

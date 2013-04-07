@@ -13,6 +13,7 @@ class Console
         @hub = $.connection.clunchHub
 
         @hub.client.addMessage = @addMessage
+        @hub.client.login = @login
         @hub.client.log = (msg) -> console.log msg
         @hub.client.success = (msg, title) -> toastr.success msg, title
         @hub.client.info = (msg, title) -> toastr.info msg, title
@@ -26,15 +27,20 @@ class Console
                 console.error msg
                 toastr.error msg
 
-    addMessage: (message, className) =>
+    addMessage: (name, message, className) =>
         #TODO: consider using binding here?
-        @output.append $('<div/>').addClass(className).text message
+        @output.append $('<div/>').addClass(className).text "#{name}: #{message}"
         @output.scrollTop(@output.prop 'scrollHeight')
-        msgbox = @dialog.messageBox title ? "Success", message, [{label:'Yes, I\'m sure', result: 'yes'},{label:'Nope', result: 'no'}]
-        msgbox.open().then (result) ->
-            console.log(result)
+        #msgbox = @dialog.messageBox title ? "Success", message, [{label:'Yes, I\'m sure', result: 'yes'},{label:'Nope', result: 'no'}]
+        #msgbox.open().then (result) ->
+        #    console.log(result)
         # this is needed to "pump the message loop" in angular so that promises resolve
-        @scope.$apply()
+        #@scope.$apply()
+
+    login: () =>
+        name = prompt 'Who are you?', ''
+        if name.length > 0
+            @hub.server.login name
 
     sendMessage: (e) =>
         e.preventDefault()
