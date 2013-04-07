@@ -118,6 +118,8 @@ table.contactList tr:hover .btn-group {
 .console > div {
   height: 100%;
   overflow: auto;
+  -ms-scrollbar-base-color: #30353b;
+  scrollbar-base-color: #30353b;
 }
 .console:hover {
   -webkit-transform: perspective(800px) rotateY(33deg);
@@ -125,4 +127,15 @@ table.contactList tr:hover .btn-group {
   -ms-transform: perspective(800px) rotateY(33deg);
   -o-transform: perspective(800px) rotateY(33deg);
   transform: perspective(800px) rotateY(33deg);
+}
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.7);
 }
