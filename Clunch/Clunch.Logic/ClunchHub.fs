@@ -27,7 +27,11 @@ type ClunchHub(lifetimeScope:ILifetimeScope) =
     override x.OnDisconnected() =
         x.Clients.Others?warning(sprintf "Client %s has disconnected." x.Context.ConnectionId)
 
+    override x.OnReconnected() =
+        x.Clients.Others?info(sprintf "Client %s has reconnected." x.Context.ConnectionId)
+
     override x.Dispose(disposing) =
+        base.Dispose(disposing)
         if disposing then
             scope.Dispose()
 

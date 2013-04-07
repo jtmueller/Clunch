@@ -1,9 +1,9 @@
 ﻿(function() {
   'use strict';
 
-  angular.module('clunch', ['clunchServices', 'ui.bootstrap']).config([
-    '$routeProvider', function($routeProvider) {
-      return $routeProvider.when('/contacts', {
+  angular.module('clunch', ['clunchServices', 'ui.bootstrap', 'ui.bootstrap.dialog']).config([
+    '$routeProvider', '$dialogProvider', function($routeProvider, $dialogProvider) {
+      $routeProvider.when('/contacts', {
         templateUrl: 'Templates/contactList.html',
         controller: 'ContactList'
       }).when('/contacts/create', {
@@ -16,6 +16,10 @@
         template: '<console></console>'
       }).otherwise({
         redirectTo: '/contacts'
+      });
+      $dialogProvider.options({
+        backdrop: true,
+        backdropFade: true
       });
     }
   ]).run([

@@ -1,7 +1,7 @@
 ﻿'use strict'
 
-angular.module('clunch', ['clunchServices', 'ui.bootstrap'])
-    .config(['$routeProvider', ($routeProvider) ->
+angular.module('clunch', ['clunchServices', 'ui.bootstrap', 'ui.bootstrap.dialog'])
+    .config(['$routeProvider', '$dialogProvider', ($routeProvider, $dialogProvider) ->
         $routeProvider
             .when('/contacts',
                 templateUrl: 'Templates/contactList.html'
@@ -16,6 +16,12 @@ angular.module('clunch', ['clunchServices', 'ui.bootstrap'])
                 template: '<console></console>')
             .otherwise
                 redirectTo: '/contacts'
+
+        $dialogProvider.options
+            backdrop: true
+            backdropFade: true
+
+        return
     ])
     .run(['$rootScope', '$location', ($rootScope, $location) ->
         # register listener to watch route changes

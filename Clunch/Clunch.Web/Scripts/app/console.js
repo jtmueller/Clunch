@@ -32,17 +32,32 @@
         return toastr.warning(msg, title);
       };
       this.hub.client.error = function(msg, title) {
-        toastr.warning.error(msg, title);
-        return console.log(msg);
+        console.error(msg);
+        return toastr.error(msg, title);
       };
       $.connection.hub.start().fail(function(msg) {
+        console.error(msg);
         return toastr.error(msg);
       });
     }
 
-    Console.prototype.addMessage = function(message) {
-      this.output.append($('<div/>').text(message));
-      return this.output.scrollTop(this.output.prop('scrollHeight'));
+    Console.prototype.addMessage = function(message, className) {
+      var msgbox;
+      this.output.append($('<div/>').addClass(className).text(message));
+      this.output.scrollTop(this.output.prop('scrollHeight'));
+      msgbox = this.dialog.messageBox(typeof title !== "undefined" && title !== null ? title : "Success", message, [
+        {
+          label: 'Yes, I\'m sure',
+          result: 'yes'
+        }, {
+          label: 'Nope',
+          result: 'no'
+        }
+      ]);
+      msgbox.open().then(function(result) {
+        return console.log(result);
+      });
+      return this.scope.$apply();
     };
 
     Console.prototype.sendMessage = function(e) {
@@ -73,7 +88,7 @@
       replace: true,
       scope: {},
       template: '<div>\n    <div class="row-fluid">\n        <div class="span5 console">\n        </div>\n    </div>\n    <div class="row-fluid">\n        <form name="consoleForm" class="navbar-form pull-left span5">\n            <input type="text" class="span10" required />\n            <input type="button" class="btn span2" value="Send" ng-disabled="consoleForm.$invalid" />\n        </form>\n    </div>\n</div>',
-      controller: Console,
+      controller: ['$scope', '$element', '$dialog', Console],
       link: function(scope, element, attrs) {}
     };
   });

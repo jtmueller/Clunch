@@ -554,9 +554,9 @@ dialogModule.provider("$dialog", function(){
     keyboard: true, // close with esc key
     backdropClick: true // only in conjunction with backdrop=true
     /* other options: template, templateUrl, controller */
-	};
+    };
 
-	var globalOptions = {};
+    var globalOptions = {};
 
   var activeBackdrops = {value : 0};
 
@@ -566,21 +566,21 @@ dialogModule.provider("$dialog", function(){
   //        // don't close dialog when backdrop is clicked by default
   //        $dialogProvider.options({backdropClick: false});
   //      });
-	this.options = function(value){
-		globalOptions = value;
-	};
+    this.options = function(value){
+        globalOptions = value;
+    };
 
   // Returns the actual `$dialog` service that is injected in controllers
-	this.$get = ["$http", "$document", "$compile", "$rootScope", "$controller", "$templateCache", "$q", "$transition", "$injector",
+    this.$get = ["$http", "$document", "$compile", "$rootScope", "$controller", "$templateCache", "$q", "$transition", "$injector",
   function ($http, $document, $compile, $rootScope, $controller, $templateCache, $q, $transition, $injector) {
 
-		var body = $document.find('body');
+        var body = $document.find('body');
 
-		function createElement(clazz) {
-			var el = angular.element("<div>");
-			el.addClass(clazz);
-			return el;
-		}
+        function createElement(clazz) {
+            var el = angular.element("<div>");
+            el.addClass(clazz);
+            return el;
+        }
 
     // The `Dialog` class represents a modal dialog. The dialog class can be invoked by providing an options object
     // containing at lest template or templateUrl and controller:
@@ -590,7 +590,7 @@ dialogModule.provider("$dialog", function(){
     // Dialogs can also be created using templateUrl and controller as distinct arguments:
     //
     //     var d = new Dialog('path/to/dialog.html', MyDialogController);
-		function Dialog(opts) {
+        function Dialog(opts) {
 
       var self = this, options = this.options = angular.extend({}, defaults, globalOptions, opts);
 
@@ -1471,14 +1471,14 @@ angular.module('ui.bootstrap.transition', [])
     'WebkitTransition': 'webkitTransitionEnd',
     'MozTransition': 'transitionend',
     'OTransition': 'oTransitionEnd',
-    'msTransition': 'MSTransitionEnd',
+    //'msTransition': 'MSTransitionEnd',
     'transition': 'transitionend'
   };
   var animationEndEventNames = {
     'WebkitTransition': 'webkitAnimationEnd',
     'MozTransition': 'animationend',
     'OTransition': 'oAnimationEnd',
-    'msTransition': 'MSAnimationEnd',
+    //'msTransition': 'MSAnimationEnd',
     'transition': 'animationend'
   };
   function findEndEventName(endEventNames) {

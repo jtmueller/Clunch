@@ -223,9 +223,6 @@
     <Content Include="Scripts\app\controllers.coffee" />
     <Content Include="Scripts\app\filters.coffee" />
     <Content Include="Scripts\app\services.coffee" />
-    <Content Include="Scripts\angular-bootstrap.min.js.map">
-      <DependentUpon>angular-bootstrap.js</DependentUpon>
-    </Content>
     <Content Include="Content\prefixer.less" />
     <None Include="Properties\PublishProfiles\Clunch Local.pubxml" />
     <Content Include="Scripts\app\app.min.js.map">
@@ -249,21 +246,6 @@
     <Content Include="Scripts\jstd-scenario-adapter-config.js" />
     <Content Include="Scripts\jstd-scenario-adapter.js" />
     <Content Include="Scripts\modernizr-2.6.2-respond-1.1.0.min.js" />
-    <Content Include="Scripts\template\accordion\accordion-group.html" />
-    <Content Include="Scripts\template\accordion\accordion.html" />
-    <Content Include="Scripts\template\alert\alert.html" />
-    <Content Include="Scripts\template\carousel\carousel.html" />
-    <Content Include="Scripts\template\carousel\slide.html" />
-    <Content Include="Scripts\template\dialog\message.html" />
-    <Content Include="Scripts\template\pagination\pagination.html" />
-    <Content Include="Scripts\template\popover\popover.html" />
-    <Content Include="Scripts\template\progressbar\bar.html" />
-    <Content Include="Scripts\template\progressbar\progress.html" />
-    <Content Include="Scripts\template\tabs\pane.html" />
-    <Content Include="Scripts\template\tabs\tabs.html" />
-    <Content Include="Scripts\template\tooltip\tooltip-html-unsafe-popup.html" />
-    <Content Include="Scripts\template\tooltip\tooltip-popup.html" />
-    <Content Include="Scripts\template\typeahead\typeahead.html" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\ui-bootstrap-0.2.0.js" />
@@ -311,6 +293,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.9.1.min.js.map">
       <DependentUpon>jquery-1.9.1.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\ui-bootstrap-tpls-0.2.0.min.js.map">
+      <DependentUpon>ui-bootstrap-tpls-0.2.0.js</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

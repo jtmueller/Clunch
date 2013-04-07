@@ -18,15 +18,23 @@ class Console
         @hub.client.info = (msg, title) -> toastr.info msg, title
         @hub.client.warning = (msg, title) -> toastr.warning msg, title
         @hub.client.error = (msg, title) -> 
-            toastr.warning.error msg, title
-            console.log msg
+            console.error msg
+            toastr.error msg, title
 
         $.connection.hub.start()
-            .fail((msg) -> toastr.error msg)
+            .fail (msg) -> 
+                console.error msg
+                toastr.error msg
 
-    addMessage: (message) =>
-        @output.append $('<div/>').text message
+    addMessage: (message, className) =>
+        #TODO: consider using binding here?
+        @output.append $('<div/>').addClass(className).text message
         @output.scrollTop(@output.prop 'scrollHeight')
+        msgbox = @dialog.messageBox title ? "Success", message, [{label:'Yes, I\'m sure', result: 'yes'},{label:'Nope', result: 'no'}]
+        msgbox.open().then (result) ->
+            console.log(result)
+        # this is needed to "pump the message loop" in angular so that promises resolve
+        @scope.$apply()
 
     sendMessage: (e) =>
         e.preventDefault()
@@ -61,7 +69,7 @@ app.directive 'console', () ->
             </div>
         </div>
         '''
-    controller: Console
+    controller: ['$scope', '$element', '$dialog', Console]
     link: (scope, element, attrs) ->
         # The linking function adds behavior to the template
 
