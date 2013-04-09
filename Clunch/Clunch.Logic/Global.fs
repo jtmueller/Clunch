@@ -33,10 +33,7 @@ type AutofacConfig private () =
         builder.RegisterWebApiFilterProvider(config)
 
         builder.Register<IDocumentStore>(fun c ->
-            let cnName =
-                [ "RAVENHQ_CONNECTION_STRING"; "Clunch" ]
-                |> List.find (fun cn -> isNotNull ConfigurationManager.ConnectionStrings.[cn])
-            let store = new DocumentStore(ConnectionStringName=cnName)
+            let store = new DocumentStore(ConnectionStringName="RAVENHQ_CONNECTION_STRING")
             store.Initialize()
         ).SingleInstance().End()
 
