@@ -68,7 +68,18 @@ type Global() =
     static member RegisterRoutes(routes:RouteCollection) =
         routes.MapHubs() |> ignore
 
-        routes.IgnoreRoute( "{resource}.axd/{*pathInfo}")
+        routes.IgnoreRoute("{resource}.axd/{*pathInfo}")
+        routes.IgnoreRoute("robots.txt")
+        routes.IgnoreRoute("sitemap")
+        routes.IgnoreRoute("sitemap.gz")
+        routes.IgnoreRoute("sitemap.xml")
+        routes.IgnoreRoute("sitemap.xml.gz")
+        routes.IgnoreRoute("google_sitemap.xml")
+        routes.IgnoreRoute("google_sitemap.xml.gz")
+        routes.IgnoreRoute("favicon.ico")
+        routes.IgnoreRoute("apple-touch-icon.png")
+        routes.IgnoreRoute("apple-touch-icon-precomposed.png")
+
         routes.MapHttpRoute( "DefaultApi", "api/{controller}/{id}", 
             { id = RouteParameter.Optional } ) |> ignore
         routes.MapRoute("Default", "{controller}/{action}/{id}", 
@@ -80,7 +91,7 @@ type Global() =
         AreaRegistration.RegisterAllAreas()
         Global.RegisterGlobalFilters GlobalFilters.Filters
         BundleConfig.RegisterBundles BundleTable.Bundles
-        GlobalConfiguration.Configuration.Filters.Add(new ElmahHandleErrorApiAttribute())
+        GlobalConfiguration.Configuration.Filters.Add(ElmahHandleErrorApiAttribute())
         GlobalHost.HubPipeline.AddModule (ElmahPipelineModule()) |> ignore
 
         GlobalConfiguration.Configuration.Formatters
