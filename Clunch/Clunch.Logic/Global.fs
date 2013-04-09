@@ -33,7 +33,7 @@ type AutofacConfig private () =
         builder.RegisterWebApiFilterProvider(config)
 
         builder.Register<IDocumentStore>(fun c ->
-            let store = new DocumentStore(ConnectionStringName="RAVENHQ_CONNECTION_STRING")
+            let store = new DocumentStore(ConnectionStringName="RavenDB")
             store.Initialize()
         ).SingleInstance().End()
 
