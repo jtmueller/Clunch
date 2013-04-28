@@ -69,7 +69,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac.Integration.WebApi">
-      <HintPath>..\..\packages\Autofac.WebApi.3.0.1\lib\net40\Autofac.Integration.WebApi.dll</HintPath>
+      <HintPath>..\..\packages\Autofac.WebApi.3.0.2\lib\net40\Autofac.Integration.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Elmah">
@@ -121,7 +121,7 @@
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.5.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin">
