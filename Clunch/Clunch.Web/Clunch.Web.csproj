@@ -228,7 +228,6 @@
       <DependentUpon>app.js</DependentUpon>
     </Content>
     <Content Include="AppScripts\console.coffee" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="AppScripts\services.js">
       <DependentUpon>services.coffee</DependentUpon>
     </Content>
@@ -238,8 +237,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\i18n\angular-locale_en-us.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <None Include="Scripts\jquery-2.0.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.0.0.js" />
+    <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Scripts\jquery.signalR-1.0.1.js" />
     <Content Include="Scripts\jquery.signalR-1.0.1.min.js" />
     <Content Include="Scripts\jstd-scenario-adapter-config.js" />
@@ -290,9 +290,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\jquery-1.9.1.min.js.map">
-      <DependentUpon>jquery-1.9.1.js</DependentUpon>
-    </Content>
+    <Content Include="Scripts\jquery-2.0.0.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
