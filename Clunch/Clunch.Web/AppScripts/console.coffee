@@ -1,7 +1,7 @@
 ﻿'use strict'
 
 class Console
-    constructor: ($scope, $dialog) ->
+    constructor: ($scope, $element, $dialog) ->
         @scope = $scope
         @scope.messages = []
         @el = $element
@@ -27,6 +27,9 @@ class Console
             .fail (msg) -> 
                 console.error msg
                 toastr.error msg
+
+        $scope.$on '$destroy', ->
+            $.connection.hub.stop()
 
     addMessage: (name, text, className) =>
         @scope.messages.push
@@ -58,7 +61,7 @@ class Console
             controller: ['$scope', 'dialog', ($scope, dialog) ->
                 dialog.modalEl.find('form').submit -> dialog.close $scope.name
                 $scope.login = -> dialog.close $scope.name
-                setTimeout ->
+                _.delay ->
                     dialog.modalEl.find('input[name="loginName"]').focus()
                 , 250
             ]
@@ -84,32 +87,11 @@ class Console
 
 app = angular.module 'clunch'
 
-app.controller 'Console', ['$scope', '$dialog', Console]
-
 app.directive 'console', () ->
     restrict: 'E'
     replace: true
     scope: {}
-    template: 
-        '''
-        <div>
-            <div class="row-fluid">
-                <div class="span5 console">
-                    <div>
-                        <div ng-repeat="message in messages" ng-class="message.className"><b>{{message.user}}:</b> {{message.text}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row-fluid">
-                <form name="consoleForm" class="navbar-form pull-left span5">
-                    <input type="text" class="span10" required />
-                    <input type="button" class="btn span2" value="Send" ng-disabled="consoleForm.$invalid" />
-                </form>
-            </div>
-        </div>
-        '''
+    templateUrl: 'Templates/console.html'
     controller: ['$scope', '$element', '$dialog', Console]
     link: (scope, element, attrs) ->
         # The linking function adds behavior to the template
-
-
