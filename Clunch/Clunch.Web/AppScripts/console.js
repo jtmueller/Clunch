@@ -6,7 +6,7 @@
 
   Console = (function() {
 
-    function Console($scope, $element, $dialog) {
+    function Console($scope, $dialog) {
       this.sendMessage = __bind(this.sendMessage, this);
 
       this.login = __bind(this.login, this);
@@ -109,6 +109,8 @@
   })();
 
   app = angular.module('clunch');
+
+  app.controller('Console', ['$scope', '$dialog', Console]);
 
   app.directive('console', function() {
     return {

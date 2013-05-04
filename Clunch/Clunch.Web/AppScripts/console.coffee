@@ -1,7 +1,7 @@
 ﻿'use strict'
 
 class Console
-    constructor: ($scope, $element, $dialog) ->
+    constructor: ($scope, $dialog) ->
         @scope = $scope
         @scope.messages = []
         @el = $element
@@ -83,6 +83,8 @@ class Console
 
 
 app = angular.module 'clunch'
+
+app.controller 'Console', ['$scope', '$dialog', Console]
 
 app.directive 'console', () ->
     restrict: 'E'

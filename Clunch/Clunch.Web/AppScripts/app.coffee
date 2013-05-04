@@ -13,7 +13,8 @@ angular.module('clunch', ['clunchServices', 'ui.bootstrap', 'ui.bootstrap.dialog
                 templateUrl: 'Templates/contactEdit.html'
                 controller: 'ContactEdit')
             .when('/chat',
-                template: '<console></console>')
+                templateUrl: 'Templates/console.html'
+                controller: 'Console')
             .otherwise
                 redirectTo: '/contacts'
 

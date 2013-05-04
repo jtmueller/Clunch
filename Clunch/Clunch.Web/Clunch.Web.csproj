@@ -253,6 +253,7 @@
     <Content Include="Scripts\ui-bootstrap-tpls-0.2.0.min.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\underscore.min.js" />
+    <Content Include="Templates\console.html" />
     <Content Include="Templates\contactList.html" />
     <Content Include="Templates\contactEdit.html" />
     <Content Include="Web.config">
