@@ -14,6 +14,7 @@ class Console
         @hub = $.connection.clunchHub
 
         @hub.client.addMessage = @addMessage
+        @hub.client.updateUsers = @updateUsers
         @hub.client.login = @login
         @hub.client.log = (msg) -> console.log msg
         @hub.client.success = (msg, title) -> toastr.success msg, title
@@ -40,6 +41,9 @@ class Console
             @scope.messages.shift()
         @scope.$apply()
         @outputScroll.scrollTop(@outputScroll.prop 'scrollHeight')
+
+    updateUsers: (users) ->
+        console.log users
 
     login: =>
         dlg = @dialog.dialog

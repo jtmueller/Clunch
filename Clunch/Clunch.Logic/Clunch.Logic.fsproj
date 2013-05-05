@@ -47,6 +47,7 @@
     <Compile Include="Controllers\ContactsController.fs" />
     <Compile Include="ClunchHub.fs" />
     <Compile Include="SignalrExtensions.fs" />
+    <Compile Include="JsonConverters.fs" />
     <Compile Include="BundleConfig.fs" />
     <Compile Include="Global.fs" />
     <None Include="packages.config" />

@@ -7,6 +7,11 @@ open Autofac
 open ImpromptuInterface.FSharp
 open Clunch.Agents
 
+type UserListModel = {
+    ConnectionId: Guid
+    Name: string
+}
+
 // https://code.google.com/p/autofac/wiki/SignalRIntegration
 
 // Game state in memory. Users, characters, rooms, objects definitions in DB.
@@ -26,12 +31,17 @@ type ClunchHub(lifetimeScope:ILifetimeScope) =
         | :? NullReferenceException ->
             x.Clients.Caller?login()
 
-    member x.Login(name:string) : Task =
-        let connId = Guid(x.Context.ConnectionId)
-        UserAgent.connect connId name
-        x.Clients.Caller?name <- name
-        x.Clients.Caller?success(sprintf "Welcome, %s!" name)
-        x.Clients.Others?info(sprintf "User '%s' has connected." name)
+    member x.Login(name:string) =
+        async {
+            let connId = Guid(x.Context.ConnectionId)
+            let! users = UserAgent.connect connId name
+            let userList =
+                users |> Seq.map (function KeyValue(cnId, name) -> { ConnectionId = cnId; Name = name })
+            x.Clients.Caller?name <- name
+            x.Clients.Caller?success(sprintf "Welcome, %s!" name)
+            x.Clients.Others?info(sprintf "User '%s' has connected." name)
+            x.Clients.All?updateUsers userList
+        } |> Async.StartAsTask :> Task
 
     override x.OnConnected() =
         x.Clients.Caller?login()

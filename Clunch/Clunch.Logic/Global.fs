@@ -20,6 +20,8 @@ open Raven.Client.Document.Async
 open Raven.Database.Server
 open Elmah.Contrib.WebApi
 open Microsoft.AspNet.SignalR
+open Newtonsoft.Json
+open Newtonsoft.Json.Converters
 open Newtonsoft.Json.Serialization
 
 type AutofacConfig private () =
@@ -43,6 +45,10 @@ type AutofacConfig private () =
         builder.Register<IAsyncDocumentSession>(fun (c:IComponentContext) -> c.Resolve<IDocumentStore>().OpenAsyncSession())
             .InstancePerHttpRequest().End()
 
+        builder.Register(fun _ -> Json.JsonNetSerializer(config.Formatters.JsonFormatter.SerializerSettings))
+            .As<Json.IJsonSerializer>()
+            .SingleInstance().End()
+
         builder.RegisterHubs(typeof<ClunchHub>.Assembly).End()
 
         let container = builder.Build()
@@ -57,15 +63,19 @@ type ApiRoute = { id: RouteParameter }
 type Global() =
     inherit System.Web.HttpApplication()
 
-    static let mutable docStore : IDocumentStore = null
-        
-    /// The shared RavenDB Document Store.
-    static member DocumentStore = docStore
+    static member private ConfigureJson (config:HttpConfiguration) =
+        let jsonSettings = config.Formatters.JsonFormatter.SerializerSettings
+        jsonSettings.ContractResolver <- DefaultContractResolver(SerializeCompilerGeneratedMembers=false)
+        [ OptionConverter()     :> JsonConverter
+          ListConverter()       :> JsonConverter
+          TupleArrayConverter() :> JsonConverter
+          UnionTypeConverter()  :> JsonConverter ]
+        |> List.iter jsonSettings.Converters.Add
 
-    static member RegisterGlobalFilters (filters:GlobalFilterCollection) =
+    static member private RegisterGlobalFilters (filters:GlobalFilterCollection) =
         filters.Add(new HandleErrorAttribute())
 
-    static member RegisterRoutes(routes:RouteCollection) =
+    static member private RegisterRoutes(routes:RouteCollection) =
         routes.MapHubs() |> ignore
 
         routes.IgnoreRoute("{resource}.axd/{*pathInfo}")
@@ -86,6 +96,7 @@ type Global() =
             { controller = "Home"; action = "Index"; id = UrlParameter.Optional } ) |> ignore
 
     member this.Application_Start(sender:obj, e:EventArgs) =
+        Global.ConfigureJson GlobalConfiguration.Configuration
         AutofacConfig.Register GlobalConfiguration.Configuration
         Global.RegisterRoutes RouteTable.Routes
         AreaRegistration.RegisterAllAreas()
@@ -94,6 +105,3 @@ type Global() =
         GlobalConfiguration.Configuration.Filters.Add(ElmahHandleErrorApiAttribute())
         GlobalHost.HubPipeline.AddModule (ElmahPipelineModule()) |> ignore
 
-        GlobalConfiguration.Configuration.Formatters
-            .JsonFormatter.SerializerSettings.ContractResolver <- 
-                DefaultContractResolver(SerializeCompilerGeneratedMembers = false)

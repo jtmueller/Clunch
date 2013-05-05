@@ -22,6 +22,7 @@
       this.el.find('input[type="button"]').click(this.sendMessage);
       this.hub = $.connection.clunchHub;
       this.hub.client.addMessage = this.addMessage;
+      this.hub.client.updateUsers = this.updateUsers;
       this.hub.client.login = this.login;
       this.hub.client.log = function(msg) {
         return console.log(msg);
@@ -59,6 +60,10 @@
       }
       this.scope.$apply();
       return this.outputScroll.scrollTop(this.outputScroll.prop('scrollHeight'));
+    };
+
+    Console.prototype.updateUsers = function(users) {
+      return console.log(users);
     };
 
     Console.prototype.login = function() {
