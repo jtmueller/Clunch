@@ -18,10 +18,16 @@ type UserListModel = {
 // MailboxProcessors to coordinate things.
 
 // hub is one instance per call. Use room ID for group name.
-type ClunchHub(lifetimeScope:ILifetimeScope) =
+type ClunchHub(parentScope:ILifetimeScope) =
     inherit Hub()
-    let scope = lifetimeScope.BeginLifetimeScope("httpRequest")
+    let scope = parentScope.BeginLifetimeScope("httpRequest")
     // TODO: scope.Resolve<T>() for any services we need here
+
+    let exec (action:Async<unit>) =
+        Async.StartAsTask action :> Task
+
+    let await (action:Task) =
+        Async.AwaitEmptyTask action
 
     member x.Send(message:string) : Task =
         try
@@ -38,10 +44,12 @@ type ClunchHub(lifetimeScope:ILifetimeScope) =
             let userList =
                 users |> Seq.map (function KeyValue(cnId, name) -> { ConnectionId = cnId; Name = name })
             x.Clients.Caller?name <- name
-            x.Clients.Caller?success(sprintf "Welcome, %s!" name)
-            x.Clients.Others?info(sprintf "User '%s' has connected." name)
-            x.Clients.All?updateUsers userList
-        } |> Async.StartAsTask :> Task
+            
+            do! [ await <| x.Clients.Caller?success (sprintf "Welcome, %s!" name)
+                  await <| x.Clients.Others?info (sprintf "User '%s' has connected." name)
+                  await <| x.Clients.All?updateUsers userList ]
+                |> Async.Parallel |> Async.Ignore
+        } |> exec
 
     override x.OnConnected() =
         x.Clients.Caller?login()
@@ -50,8 +58,8 @@ type ClunchHub(lifetimeScope:ILifetimeScope) =
         async {
             let connId = Guid(x.Context.ConnectionId)
             let! name = UserAgent.disconnect connId
-            x.Clients.Others?warning(sprintf "User '%s' has disconnected." (name |? "Unknown"))
-        } |> Async.StartAsTask :> Task
+            do! await <| x.Clients.Others?warning (sprintf "User '%s' has disconnected." (name |? "Unknown"))
+        } |> exec
 
     override x.OnReconnected() =
         async {
@@ -59,10 +67,10 @@ type ClunchHub(lifetimeScope:ILifetimeScope) =
             let! name = UserAgent.get connId
             match name with
             | Some n ->
-                x.Clients.Others?info(sprintf "User '%s' has reconnected." n)
+                do! await <| x.Clients.Others?info (sprintf "User '%s' has reconnected." n)
             | None ->
-                x.Clients.Caller?login()
-        } |> Async.StartAsTask :> Task
+                do! await <| x.Clients.Caller?login()
+        } |> exec
 
     override x.Dispose(disposing) =
         base.Dispose(disposing)
