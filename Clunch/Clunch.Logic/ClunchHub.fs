@@ -26,8 +26,7 @@ type ClunchHub(parentScope:ILifetimeScope) =
     let exec (action:Async<unit>) =
         Async.StartAsTask action :> Task
 
-    let await (action:Task) =
-        Async.AwaitEmptyTask action
+    let await = Async.AwaitEmptyTask
 
     member x.Send(message:string) : Task =
         try
@@ -42,12 +41,14 @@ type ClunchHub(parentScope:ILifetimeScope) =
             let connId = Guid(x.Context.ConnectionId)
             let! users = UserAgent.connect connId name
             let userList =
-                users |> Seq.map (function KeyValue(cnId, name) -> { ConnectionId = cnId; Name = name })
+                users 
+                |> Seq.map (function KeyValue(cnId, name) -> { ConnectionId = cnId; Name = name })
+                |> Seq.sortBy (fun u -> u.Name)
             x.Clients.Caller?name <- name
             
             do! [ await <| x.Clients.Caller?success (sprintf "Welcome, %s!" name)
-                  await <| x.Clients.Others?info (sprintf "User '%s' has connected." name)
-                  await <| x.Clients.All?updateUsers userList ]
+                  await <| x.Clients.Caller?setUsers userList
+                  await <| x.Clients.Others?addUser { ConnectionId = connId; Name = name } ]
                 |> Async.Parallel |> Async.Ignore
         } |> exec
 
@@ -58,7 +59,7 @@ type ClunchHub(parentScope:ILifetimeScope) =
         async {
             let connId = Guid(x.Context.ConnectionId)
             let! name = UserAgent.disconnect connId
-            do! await <| x.Clients.Others?warning (sprintf "User '%s' has disconnected." (name |? "Unknown"))
+            do! await <| x.Clients.All?removeUser { ConnectionId = connId; Name = (name |? "Unknown") }
         } |> exec
 
     override x.OnReconnected() =

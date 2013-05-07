@@ -15,8 +15,10 @@ table.contactList {
     }
 }
 
+@consoleHeight: 300px;
+
 .console {
-    height: 300px;
+    height: @consoleHeight;
     overflow: hidden;
     border-radius: 5px;
     margin-bottom: 15px;
@@ -34,8 +36,23 @@ table.contactList {
         scrollbar-base-color: #30353b;
     }
 
-    &:hover {
+    &.skew {
         .transform(perspective(800px) rotateY(33deg));
+    }
+}
+
+.userList {
+    overflow: auto;
+    padding: 4px;
+    -ms-scrollbar-base-color: #30353b;
+    scrollbar-base-color: #30353b;
+    
+    div {
+        border-radius: 3px;
+        padding-left: 3px;
+    }
+    div:hover {
+        background: black;
     }
 }
 

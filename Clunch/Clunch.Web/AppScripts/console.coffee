@@ -4,6 +4,7 @@ class Console
     constructor: ($scope, $element, $dialog) ->
         @scope = $scope
         @scope.messages = []
+        @scope.users = []
         @el = $element
         @dialog = $dialog
         @outputScroll = @el.find '.console > div'
@@ -14,7 +15,9 @@ class Console
         @hub = $.connection.clunchHub
 
         @hub.client.addMessage = @addMessage
-        @hub.client.updateUsers = @updateUsers
+        @hub.client.setUsers = @setUsers
+        @hub.client.addUser = @addUser
+        @hub.client.removeUser = @removeUser
         @hub.client.login = @login
         @hub.client.log = (msg) -> console.log msg
         @hub.client.success = (msg, title) -> toastr.success msg, title
@@ -42,8 +45,20 @@ class Console
         @scope.$apply()
         @outputScroll.scrollTop(@outputScroll.prop 'scrollHeight')
 
-    updateUsers: (users) ->
-        console.log users
+    setUsers: (users) =>
+        @scope.users = users
+        @scope.$apply()
+
+    addUser: (user) =>
+        toastr.info "User '#{user.Name}' has connected."
+        @scope.users.push user
+        @scope.users = _.sortBy @scope.users, 'Name'
+        @scope.$apply()
+
+    removeUser: (user) =>
+        toastr.warning "User '#{user.Name}' has disconnected."
+        @scope.users = (u for u in @scope.users when u.ConnectionId != user.ConnectionId)
+        @scope.$apply()
 
     login: =>
         dlg = @dialog.dialog

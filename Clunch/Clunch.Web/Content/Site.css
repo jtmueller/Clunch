@@ -121,12 +121,25 @@ table.contactList tr:hover .btn-group {
   -ms-scrollbar-base-color: #30353b;
   scrollbar-base-color: #30353b;
 }
-.console:hover {
+.console.skew {
   -webkit-transform: perspective(800px) rotateY(33deg);
   -moz-transform: perspective(800px) rotateY(33deg);
   -ms-transform: perspective(800px) rotateY(33deg);
   -o-transform: perspective(800px) rotateY(33deg);
   transform: perspective(800px) rotateY(33deg);
+}
+.userList {
+  overflow: auto;
+  padding: 4px;
+  -ms-scrollbar-base-color: #30353b;
+  scrollbar-base-color: #30353b;
+}
+.userList div {
+  border-radius: 3px;
+  padding-left: 3px;
+}
+.userList div:hover {
+  background: black;
 }
 .login {
   width: 300px;

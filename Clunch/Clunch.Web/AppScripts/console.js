@@ -11,9 +11,16 @@
 
       this.login = __bind(this.login, this);
 
+      this.removeUser = __bind(this.removeUser, this);
+
+      this.addUser = __bind(this.addUser, this);
+
+      this.setUsers = __bind(this.setUsers, this);
+
       this.addMessage = __bind(this.addMessage, this);
       this.scope = $scope;
       this.scope.messages = [];
+      this.scope.users = [];
       this.el = $element;
       this.dialog = $dialog;
       this.outputScroll = this.el.find('.console > div');
@@ -22,7 +29,9 @@
       this.el.find('input[type="button"]').click(this.sendMessage);
       this.hub = $.connection.clunchHub;
       this.hub.client.addMessage = this.addMessage;
-      this.hub.client.updateUsers = this.updateUsers;
+      this.hub.client.setUsers = this.setUsers;
+      this.hub.client.addUser = this.addUser;
+      this.hub.client.removeUser = this.removeUser;
       this.hub.client.login = this.login;
       this.hub.client.log = function(msg) {
         return console.log(msg);
@@ -62,8 +71,34 @@
       return this.outputScroll.scrollTop(this.outputScroll.prop('scrollHeight'));
     };
 
-    Console.prototype.updateUsers = function(users) {
-      return console.log(users);
+    Console.prototype.setUsers = function(users) {
+      this.scope.users = users;
+      return this.scope.$apply();
+    };
+
+    Console.prototype.addUser = function(user) {
+      toastr.info("User '" + user.Name + "' has connected.");
+      this.scope.users.push(user);
+      this.scope.users = _.sortBy(this.scope.users, 'Name');
+      return this.scope.$apply();
+    };
+
+    Console.prototype.removeUser = function(user) {
+      var u;
+      toastr.warning("User '" + user.Name + "' has disconnected.");
+      this.scope.users = (function() {
+        var _i, _len, _ref, _results;
+        _ref = this.scope.users;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          u = _ref[_i];
+          if (u.ConnectionId !== user.ConnectionId) {
+            _results.push(u);
+          }
+        }
+        return _results;
+      }).call(this);
+      return this.scope.$apply();
     };
 
     Console.prototype.login = function() {
