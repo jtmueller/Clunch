@@ -24,6 +24,8 @@ open Newtonsoft.Json
 open Newtonsoft.Json.Converters
 open Newtonsoft.Json.Serialization
 
+type RavenConverter = Raven.Imports.Newtonsoft.Json.JsonConverter
+
 type AutofacConfig private () =
     static member Register (config:HttpConfiguration) =
         let builder = Autofac.ContainerBuilder()
@@ -36,6 +38,14 @@ type AutofacConfig private () =
 
         builder.Register<IDocumentStore>(fun c ->
             let store = new DocumentStore(ConnectionStringName="RavenDB")
+            store.Conventions.CustomizeJsonSerializer <-
+                fun serializer ->
+                    [ Raven.Converters.OptionConverter()     :> RavenConverter
+                      Raven.Converters.ListConverter()       :> RavenConverter
+                      Raven.Converters.TupleArrayConverter() :> RavenConverter
+                      Raven.Converters.UnionTypeConverter()  :> RavenConverter ]
+                    |> List.iter serializer.Converters.Add
+                    
             store.Initialize()
         ).SingleInstance().End()
 
