@@ -42,12 +42,12 @@ type BundleConfig private () =
         ) |> bundles.Add
 
         StyleBundle("~/styles/bootstrap").Include(
-            "~/Content/bootstrap.css",
-            "~/Content/bootstrap-responsive.css"
+            "~/Css/bootstrap/bootstrap.css",
+            "~/Css/bootstrap/responsive.css"
         ) |> bundles.Add
 
         StyleBundle("~/styles/css").Include(
-            "~/Content/toastr.css",
-            "~/Content/toastr-responsive.css",
-            "~/Content/Site.css"
+            "~/Css/toastr.css",
+            "~/Css/toastr-responsive.css",
+            "~/Css/Site.css"
         ) |> bundles.Add

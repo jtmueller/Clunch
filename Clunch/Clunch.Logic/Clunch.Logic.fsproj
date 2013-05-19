@@ -98,15 +98,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core">
-      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Core.1.0.1\lib\net40\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Core.1.1.0\lib\net40\Microsoft.AspNet.SignalR.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Owin">
-      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Owin.1.0.1\lib\net45\Microsoft.AspNet.SignalR.Owin.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Owin.1.1.0\lib\net45\Microsoft.AspNet.SignalR.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
-      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.SystemWeb.1.0.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.SystemWeb.1.1.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -151,7 +151,8 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
