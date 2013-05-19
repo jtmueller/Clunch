@@ -41,13 +41,6 @@ type BundleConfig private () =
             "~/Scripts/modernizr-*"
         ) |> bundles.Add
 
-        StyleBundle("~/styles/bootstrap").Include(
-            "~/Css/bootstrap/bootstrap.css",
-            "~/Css/bootstrap/responsive.css"
-        ) |> bundles.Add
-
         StyleBundle("~/styles/css").Include(
-            "~/Css/toastr.css",
-            "~/Css/toastr-responsive.css",
             "~/Css/Site.css"
         ) |> bundles.Add

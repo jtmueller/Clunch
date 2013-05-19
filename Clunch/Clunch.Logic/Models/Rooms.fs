@@ -47,7 +47,7 @@ type Room =
 
 [<AutoOpen>]
 module RoomUtils =
-    let emptyRoom =
+    let private emptyRoom =
         { Id = ""
           RoomName = ""
           Brief = None
