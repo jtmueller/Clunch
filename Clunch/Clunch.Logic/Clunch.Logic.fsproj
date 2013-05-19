@@ -41,6 +41,9 @@
     <Compile Include="Utility.fs" />
     <Compile Include="RavenExtensions.fs" />
     <Compile Include="Models\Contact.fs" />
+    <Compile Include="Models\Items.fs" />
+    <Compile Include="Models\Mobs.fs" />
+    <Compile Include="Models\Users.fs" />
     <Compile Include="Models\Rooms.fs" />
     <Compile Include="Agents\UserAgent.fs" />
     <Compile Include="Controllers\BaseControllers.fs" />

@@ -42,7 +42,9 @@ type Room =
       Brief : string option
       /// A full, detailed description of the room.
       Description : string option
-      Exits: Exit list }
+      Exits: Exit list
+      Items: ItemInstance list
+      Mobs: Mob list }
       // TODO: string properties to hold LUA scripts for events?
 
 [<AutoOpen>]
@@ -52,7 +54,9 @@ module RoomUtils =
           RoomName = ""
           Brief = None
           Description = None
-          Exits = [] }
+          Exits = []
+          Items = []
+          Mobs = [] }
 
     type Room with
         static member Empty = emptyRoom
