@@ -68,11 +68,12 @@ type TupleArrayConverter() =
         let readElements() =
             let rec read index acc =
                 match reader.TokenType with
-                | JsonToken.EndArray -> acc
+                | JsonToken.EndArray -> 
+                    List.rev acc
                 | _ ->
                     let value = deserialize(itemTypes.[index])
                     advance()
-                    read (index + 1) (acc @ [value])
+                    read (index + 1) (value :: acc)
             advance()
             read 0 List.empty
  
@@ -96,7 +97,7 @@ type UnionTypeConverter() =
  
     override x.WriteJson(writer: JsonWriter, value: obj, serializer: JsonSerializer) =
         let t = value.GetType()
-        let write (name : string) (fields : obj []) = 
+        let write (name : string) (fields : obj[]) = 
             writer.WriteStartObject()
             writer.WritePropertyName("case")
             writer.WriteValue(name)  
@@ -200,11 +201,12 @@ type TupleArrayConverter() =
         let readElements() =
             let rec read index acc =
                 match reader.TokenType with
-                | JsonToken.EndArray -> acc
+                | JsonToken.EndArray -> 
+                    List.rev acc
                 | _ ->
                     let value = deserialize(itemTypes.[index])
                     advance()
-                    read (index + 1) (acc @ [value])
+                    read (index + 1) (value :: acc)
             advance()
             read 0 List.empty
  
@@ -228,7 +230,7 @@ type UnionTypeConverter() =
  
     override x.WriteJson(writer: JsonWriter, value: obj, serializer: JsonSerializer) =
         let t = value.GetType()
-        let write (name : string) (fields : obj []) = 
+        let write (name : string) (fields : obj[]) = 
             writer.WriteStartObject()
             writer.WritePropertyName("case")
             writer.WriteValue(name)  
