@@ -6,8 +6,9 @@ type BundleConfig private () =
     static member RegisterBundles (bundles:BundleCollection) =
         bundles.IgnoreList.Ignore("*.map")
         bundles.IgnoreList.Ignore("*.coffee")
+        bundles.UseCdn <- true
 
-        ScriptBundle("~/bundles/jquery").Include(
+        ScriptBundle("~/bundles/jquery", "//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js").Include(
             "~/Scripts/jquery-{version}.js"
         ) |> bundles.Add
 

@@ -112,6 +112,10 @@ type Global() =
         AreaRegistration.RegisterAllAreas()
         Global.RegisterGlobalFilters GlobalFilters.Filters
         BundleConfig.RegisterBundles BundleTable.Bundles
+        #if DEBUG
+        #else
+        BundleTable.EnableOptimizations <- true
+        #endif
         GlobalConfiguration.Configuration.Filters.Add(ElmahHandleErrorApiAttribute())
         GlobalHost.HubPipeline.AddModule (ElmahPipelineModule()) |> ignore
 
